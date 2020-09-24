@@ -2,6 +2,7 @@ package app.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -52,6 +53,27 @@ public class User {
         this.phone = phone;
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age &&
+                isEnabled == user.isEnabled &&
+                id.equals(user.id) &&
+                firstName.equals(user.firstName) &&
+                lastName.equals(user.lastName) &&
+                email.equals(user.email) &&
+                phone.equals(user.phone) &&
+                username.equals(user.username) &&
+                password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, age, email, phone, username, password, isEnabled);
     }
 
     public Long getId() {

@@ -1,6 +1,7 @@
 package app.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_role")
@@ -25,6 +26,20 @@ public class UserRole {
     public UserRole(User user, String role) {
         this.user = user;
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRole userRole = (UserRole) o;
+        return userRoleId.equals(userRole.userRoleId) &&
+                role.equals(userRole.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userRoleId, role);
     }
 
     public Long getUserRoleId() {
