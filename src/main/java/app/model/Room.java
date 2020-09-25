@@ -21,6 +21,9 @@ public class Room {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     @Column(name = "photo")
     private String photo;
 
@@ -36,15 +39,13 @@ public class Room {
 
     }
 
-    public Room(int numberOfPeople, BigDecimal price, String description, String photo, Hotel hotel, RoomType roomType) {
+    public Room(int numberOfPeople, BigDecimal price, String description, int quantity, String photo) {
         this.numberOfPeople = numberOfPeople;
         this.price = price;
         this.description = description;
+        this.quantity = quantity;
         this.photo = photo;
-        this.hotel = hotel;
-        this.roomType = roomType;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -55,13 +56,14 @@ public class Room {
                 id.equals(room.id) &&
                 price.equals(room.price) &&
                 description.equals(room.description) &&
+                quantity == room.quantity &&
                 photo.equals(room.photo) &&
                 roomType.equals(room.roomType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numberOfPeople, price, description, photo, roomType);
+        return Objects.hash(id, numberOfPeople, price, description, quantity, photo, roomType);
     }
 
     public Long getId() {
@@ -102,6 +104,14 @@ public class Room {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getPhoto() {

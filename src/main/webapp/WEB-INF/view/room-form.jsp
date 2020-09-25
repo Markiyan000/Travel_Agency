@@ -25,6 +25,7 @@
     <form:input type="number" path="numberOfPeople" placeholder="Number of people..." />
     <form:input type="number" path="price" placeholder="Price..." />
     <form:textarea type="text" path="description" placeholder="Description..." />
+    <form:input type="number" path="quantity" placeholder="Quantity..." />
     <form:input type="file" path="photo" />
     <button type="submit">Save</button>
 </form:form>
