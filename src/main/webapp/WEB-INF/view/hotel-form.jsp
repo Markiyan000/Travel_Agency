@@ -24,7 +24,7 @@
     <form:textarea type="text" path="description" placeholder="Description..." />
     <form:input type="number" path="stars" placeholder="Stars..." />
     <form:input type="file" path="photo" placeholder="Photo..." />
-    <button type="submit">Save</button>
+    <button type="submit">Save Hotel</button>
 </form:form>
 </body>
 </html>

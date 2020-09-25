@@ -28,14 +28,11 @@ public class RoomDaoImpl implements RoomDao {
     @Override
     @Transactional
     public void save(Long hotelId, Room room) {
-        System.out.println(room);
         Hotel hotelProxy = entityManager.getReference(Hotel.class, hotelId);
         RoomType roomType = roomTypeDao.findByType(room.getRoomType().getType());
 
         room.setHotel(hotelProxy);
         room.setRoomType(roomType);
-
-        System.out.println(room);
 
         entityManager.persist(room);
     }

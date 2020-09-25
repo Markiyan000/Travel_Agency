@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: marki
-  Date: 24.09.2020
-  Time: 20:39
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,6 +6,6 @@
 </head>
 <body>
 <h3>${hotel.name}</h3>
-
+<a href="${pageContext.request.contextPath}/rooms/${hotel.id}/form">Add Room</a>
 </body>
 </html>

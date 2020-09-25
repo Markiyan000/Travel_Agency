@@ -20,16 +20,17 @@ public class RoomController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PostMapping("/form")
-    public String showForm(Model model) {
+    @GetMapping("/{hotelId}/form")
+    public String showForm(@PathVariable Long hotelId, Model model) {
         model.addAttribute("room", new Room());
+        model.addAttribute("hotelId", hotelId);
 
-        return "room_form";
+        return "room-form";
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/{hotelId}")
-    public String saveRoom(@PathVariable Long hotelId, @RequestBody Room room) {
+    public String saveRoom(@PathVariable Long hotelId, @ModelAttribute Room room) {
         roomService.save(hotelId, room);
 
         return "redirect:/" + hotelId;
