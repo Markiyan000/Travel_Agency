@@ -1,7 +1,5 @@
 package app.model;
 
-import app.model.enums.RoomTypeEnum;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,14 +11,14 @@ public class RoomType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private RoomTypeEnum type;
+    @Column(name = "type")
+    private String type;
 
     public RoomType() {
 
     }
 
-    public RoomType(RoomTypeEnum type) {
+    public RoomType(String type) {
         this.type = type;
     }
 
@@ -46,11 +44,11 @@ public class RoomType {
         this.id = id;
     }
 
-    public RoomTypeEnum getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(RoomTypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 

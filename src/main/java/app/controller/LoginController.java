@@ -21,7 +21,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login";
+        return "login-form";
     }
 
     @GetMapping("/home")

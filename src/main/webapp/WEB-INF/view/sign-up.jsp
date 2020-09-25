@@ -10,26 +10,76 @@
 <html>
 <head>
     <title>Sign Up</title>
-    <style>
-        div {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <form:form method="post" modelAttribute="user">
-        <form:input type="text" path="firstName" placeholder="First name..." />
-        <form:input type="text" path="lastName" placeholder="Last name..." />
-        <form:input type="number" path="age" placeholder="Age..." />
-        <form:input type="text" path="email" placeholder="Email..." />
-        <form:input type="text" path="phone" placeholder="Phone..." />
-        <form:input type="text" path="username" placeholder="Username..." />
-        <form:input type="password" path="password" placeholder="Password..." />
-        <button type="submit">Sign Up</button>
-    </form:form>
-    <a href="${pageContext.request.contextPath}/">Back</a>
+<div class="container">
+    <h1>User Registration Form</h1>
+    <div class="card">
+        <div class="card-body">
+            <form:form method="post" action="${pageContext.request.contextPath}/sign-up" modelAttribute="user">
+
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="firstName"
+                                    placeholder="Enter first name..."  path="firstName"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="lastName"
+                                    placeholder="Enter last name..." path="lastName" />
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label for="lastName" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="username"
+                                    placeholder="Enter username..." path="username" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="lastName" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-7">
+                        <form:input type="password" class="form-control" name="password"
+                                    placeholder="Enter password..." path="password" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="lastName" class="col-sm-2 col-form-label">Age</label>
+                    <div class="col-sm-7">
+                        <form:input type="number" class="form-control" name="address"
+                                    placeholder="Enter age..." path="age" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="contact" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="contact"
+                                    placeholder="Enter email..." path="email" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="contact" class="col-sm-2 col-form-label">Phone Number</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="contact"
+                                    placeholder="Enter phone..." path="phone" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form:form>
+        </div>
+    </div>
 </div>
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/login">Back</a>
 </body>
 </html>

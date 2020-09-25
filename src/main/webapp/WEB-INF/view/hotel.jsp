@@ -12,5 +12,6 @@
 </head>
 <body>
 <h3>${hotel.name}</h3>
+
 </body>
 </html>
