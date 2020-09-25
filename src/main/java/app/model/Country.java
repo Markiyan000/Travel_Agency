@@ -15,9 +15,6 @@ public class Country {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Hotel> hotels;
-
     public Country() {
 
     }
@@ -54,14 +51,6 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Hotel> getHotels() {
-        return hotels;
-    }
-
-    public void setHotels(List<Hotel> hotels) {
-        this.hotels = hotels;
     }
 
     @Override

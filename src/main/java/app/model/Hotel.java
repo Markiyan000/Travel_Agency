@@ -27,7 +27,7 @@ public class Hotel {
     @Column(name = "stars")
     private int stars;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     private Country country;
 
@@ -119,6 +119,14 @@ public class Hotel {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override

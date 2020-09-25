@@ -24,6 +24,7 @@ public class HotelDaoImpl implements HotelDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Hotel> findAll() {
         Query selectAllHotels = entityManager.createQuery("select h from Hotel h join fetch h.country");
 
@@ -33,7 +34,16 @@ public class HotelDaoImpl implements HotelDao {
     @Override
     @Transactional(readOnly = true)
     public Optional<Hotel> findOne(Long hotelId) {
-        Hotel hotel = entityManager.find(Hotel.class, hotelId);
+        Query query =  createSelectOneWithJoinQuery(hotelId);
+        Hotel hotel = (Hotel) query.getSingleResult();
         return Optional.ofNullable(hotel);
+    }
+
+    private Query createSelectOneWithJoinQuery(Long hotelId) {
+        Query selectOneWithJoinQuery = entityManager.createQuery("select h from Hotel h join fetch h.country " +
+                "join fetch h.rooms where h.id =: hotelId");
+        selectOneWithJoinQuery.setParameter("hotelId", hotelId);
+
+        return selectOneWithJoinQuery;
     }
 }

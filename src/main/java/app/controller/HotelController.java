@@ -52,6 +52,7 @@ public class HotelController {
     public String findOne(@PathVariable Long hotelId, Model model) {
         Hotel foundHotel = hotelService.findOne(hotelId);
         model.addAttribute("hotel", foundHotel);
+        model.addAttribute("rooms", foundHotel.getRooms());
 
         return "hotel";
     }
