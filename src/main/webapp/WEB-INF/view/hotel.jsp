@@ -29,6 +29,7 @@
             <div class="room__item__people">${room.numberOfPeople}</div>
             <div class="room__item__price">${room.price}</div>
             <div class="room__item__description">${room.description}</div>
+            <a href="/bookings/room/${room.id}/form">Book now!</a>
         </div>
     </c:forEach>
 </div>

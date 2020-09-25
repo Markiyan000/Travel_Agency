@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.math.BigDecimal;
 
 @Repository
 public class RoomDaoImpl implements RoomDao {
@@ -35,5 +37,17 @@ public class RoomDaoImpl implements RoomDao {
         room.setRoomType(roomType);
 
         entityManager.persist(room);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal findPrice(Long roomId) {
+        Query query = createSelectPriceQuery(roomId);
+
+        return (BigDecimal) query.getSingleResult();
+    }
+
+    private Query createSelectPriceQuery(Long roomId) {
+        return entityManager.createNativeQuery("select price from room where id = " + roomId);
     }
 }
