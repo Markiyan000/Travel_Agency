@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -31,26 +31,31 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public void save(Booking booking, Long roomId) {
-        BigDecimal priceByRoom = roomDao.findPrice(roomId);
-        BigDecimal totalPrice = calculateTotalPrice(priceByRoom, booking.getNumberOfRooms());
+        BigDecimal totalPrice = calculateTotalPrice(booking, roomId);
         booking.setPrice(totalPrice);
 
         bookingDao.save(roomId, booking);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean checkAvailableRooms(Long roomId, LocalDate arrivalDate, LocalDate departureDate) {
         List<Booking> bookingsOnRoom = bookingDao.findByRoom(roomId);
         if (bookingsOnRoom.isEmpty()) {
             return true;
         }
 
-        Predicate<Booking> availableRoomsPredicate = booking -> LocalDates.minDate(booking.getDepartureDate(), departureDate).compareTo(LocalDates.maxDate(booking.getArrivalDate(), arrivalDate)) > 0;
+        Predicate<Booking> availableRoomsPredicate = booking -> LocalDates.minDate(booking.getDepartureDate(), departureDate)
+                .compareTo(LocalDates.maxDate(booking.getArrivalDate(), arrivalDate)) > 0;
 
         return bookingsOnRoom.stream().noneMatch(availableRoomsPredicate);
     }
 
-    private BigDecimal calculateTotalPrice(BigDecimal price, int quantity) {
-        return price.multiply(BigDecimal.valueOf(quantity));
+    private BigDecimal calculateTotalPrice(Booking booking, Long roomId) {
+        BigDecimal priceByRoom = roomDao.findPrice(roomId);
+        long days = ChronoUnit.DAYS.between(booking.getArrivalDate(), booking.getDepartureDate());
+        int numberOfRooms = booking.getNumberOfRooms();
+
+        return priceByRoom.multiply(BigDecimal.valueOf(days)).multiply(BigDecimal.valueOf(numberOfRooms));
     }
 }
