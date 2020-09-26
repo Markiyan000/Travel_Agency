@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/bookings")
@@ -33,6 +34,13 @@ public class BookingController {
         return "booking-form";
     }
 
+    @GetMapping("/room/{roomId}/available/form")
+    public String checkAvailableRoomsForm(@PathVariable Long roomId, Model model) {
+        model.addAttribute("roomId", roomId);
+
+        return "available-rooms-form";
+    }
+
     @PostMapping("/room/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     public String bookRoom(@PathVariable Long roomId, @ModelAttribute Booking booking, Principal principal) {
@@ -44,4 +52,9 @@ public class BookingController {
         return "home";
     }
 
+    @GetMapping("room/{roomId}/available")
+    @ResponseBody
+    public boolean checkAvailableRooms(@PathVariable Long roomId, @RequestParam("arrivalDate") String arrivalDate,  @RequestParam("departureDate") String departureDate) {
+        return bookingService.checkAvailableRooms(roomId, LocalDate.parse(arrivalDate), LocalDate.parse(departureDate));
+    }
 }

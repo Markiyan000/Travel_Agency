@@ -30,6 +30,7 @@
             <div class="room__item__price">${room.price}</div>
             <div class="room__item__description">${room.description}</div>
             <a href="/bookings/room/${room.id}/form">Book now!</a>
+            <a href="/bookings/room/${room.id}/available/form">Check availability of room</a>
         </div>
     </c:forEach>
 </div>
