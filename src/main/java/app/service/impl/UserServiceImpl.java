@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.dao.UserDao;
+import app.dao.UserRoleDao;
 import app.model.User;
 import app.model.UserRole;
 import app.service.UserService;
@@ -16,11 +17,14 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
+    private UserRoleDao userRoleDao;
+
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder encoder, UserRoleDao userRoleDao) {
         this.userDao = userDao;
+        this.userRoleDao = userRoleDao;
         this.encoder = encoder;
     }
 
@@ -37,10 +41,8 @@ public class UserServiceImpl implements UserService {
     private User constructUser(User user) {
         String encryptedPassword = encoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, "ROLE_USER"));
-        user.getUserRoles().addAll(userRoles);
+        UserRole userRole = userRoleDao.findByRole("ROLE_USER");
+        user.setUserRole(userRole);
 
         return user;
     }

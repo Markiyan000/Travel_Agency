@@ -1,9 +1,7 @@
 package app.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -37,8 +35,9 @@ public class User {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserRole> userRoles = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "user_role_id")
+    private UserRole userRole;
 
     public User() {
 
@@ -148,12 +147,12 @@ public class User {
         isEnabled = enabled;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

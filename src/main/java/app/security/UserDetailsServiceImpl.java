@@ -30,17 +30,15 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
-        List<GrantedAuthority> grantedAuthorities = buildUserAuthority(user.getUserRoles());
+        List<GrantedAuthority> grantedAuthorities = buildUserAuthority(user.getUserRole());
 
         return buildUserForAuthentication(user, grantedAuthorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(UserRole userRole) {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-        for (UserRole userRole : userRoles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
-        }
+        grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
 
         return new ArrayList<>(grantedAuthorities);
     }
