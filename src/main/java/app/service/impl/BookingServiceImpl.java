@@ -45,9 +45,6 @@ public class BookingServiceImpl implements BookingService {
     @Transactional(readOnly = true)
     public boolean checkAvailableRooms(Long roomId, LocalDate arrivalDate, LocalDate departureDate, int bookedNumberOfRooms) {
         List<Booking> bookingsOnRoom = bookingDao.findByRoom(roomId);
-        if (bookingsOnRoom.isEmpty()) {
-            return true;
-        }
         int numberOfAvailableRooms = findAvailableRoomsInRangeDate(roomId, bookingsOnRoom, arrivalDate, departureDate);
 
         return numberOfAvailableRooms >= bookedNumberOfRooms;

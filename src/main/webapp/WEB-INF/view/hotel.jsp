@@ -5,6 +5,63 @@
 <head>
     <title>Hotel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hotel.css">
+    <style>
+        .rooms {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .room__item {
+            width: 25%;
+            margin-bottom: 30px;
+            padding: 0 15px;
+            margin-left: 30px;
+        }
+
+        .room__photo {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .room__item__inner {
+            display: flex;
+            flex-direction: row;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .room__item__content{
+            font-size: 18px;
+            margin-left: 10px;
+            color: white;
+        }
+
+        .room__item__type {
+            color: red;
+            font-size: 20px;
+            margin-left: 50px;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.75;
+            transition: opacity .1s linear;
+            margin-bottom: 10px;
+        }
+
+        a:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 <!-- HEADER -->
@@ -18,7 +75,7 @@
             <div class="info">${hotel.country.name}</div>
         </div>
         <div class="hotel__city">
-            <img class="icon" src="${pageContext.request.contextPath}/resources/icons/country-icon.jpg" width="50" height="50" alt="" />
+            <img class="icon" src="${pageContext.request.contextPath}/resources/icons/city-icon.jpg" width="50" height="50" alt="" />
             <div class="info">${hotel.city}</div>
         </div>
         <div class="hotel__description">
@@ -32,14 +89,30 @@
 <div class="rooms">
     <c:forEach items="${rooms}" var="room">
         <div class="room__item">
-            <img src="${room.photo}" alt="image">
-            <h4 class="room__item__type">${room.roomType.type}</h4>
-            <div class="room__item__quantity">${room.quantity}</div>
-            <div class="room__item__people">${room.numberOfPeople}</div>
-            <div class="room__item__price">${room.price}</div>
-            <div class="room__item__description">${room.description}</div>
-            <a href="/bookings/room/${room.id}/form">Book now!</a>
-            <a href="/bookings/room/${room.id}/available/form">Check availability of room</a>
+            <img class="room__photo" src="/resources/images/${room.photo}" alt="">
+            <div class="root__item__info">
+                <div class="room__item__type">${room.roomType.type}</div>
+                <div class="room__item__inner">
+                    <img class="icon" src="${pageContext.request.contextPath}/resources/icons/people-icon.jpg" alt="" width="30" height="30"/>
+                    <div class="room__item__content">${room.numberOfPeople}</div>
+                </div>
+                <div class="room__item__inner">
+                    <img class="icon" src="${pageContext.request.contextPath}/resources/icons/price-icon.jpg" alt="" width="30" height="30"/>
+                    <div class="room__item__content">${room.price}</div>
+                </div>
+                <div class="room__item__inner">
+                    <img class="icon" src="${pageContext.request.contextPath}/resources/icons/description-icon.jpg" alt="" width="30" height="30"/>
+                    <div class="room__item__content">${room.description}</div>
+                </div>
+                <div class="room__item__inner">
+                    <img class="icon" src="${pageContext.request.contextPath}/resources/icons/quantity-icon.jpg" alt="" width="30" height="30"/>
+                    <div class="room__item__content">${room.quantity}</div>
+                </div>
+                <div class="links">
+                    <a href="/bookings/room/${room.id}/form">Book now!</a>
+                    <a href="/bookings/room/${room.id}/available/form">Check availability of room</a>
+                </div>
+            </div>
         </div>
     </c:forEach>
 </div>
