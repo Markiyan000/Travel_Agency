@@ -4,14 +4,15 @@ const negativeMessage = 'There is no available rooms on this date :(';
 let sendAjaxCall = async (roomId) => {
     const arrivalDate = document.getElementById('arrivalDate').value;
     const departureDate = document.getElementById('departureDate').value;
+    const numberOfRooms = document.getElementById('numberOfRooms').value;
 
-    const response = await fetch(`http://localhost:8080/bookings/room/${roomId}/available?arrivalDate=` + arrivalDate + "&departureDate=" + departureDate);
+    const response = await fetch(`http://localhost:8080/bookings/room/${roomId}/available?numberOfRooms=` + numberOfRooms + `&arrivalDate=` + arrivalDate + "&departureDate=" + departureDate);
     insertMessage(await response.json());
 };
 
 let insertMessage = (result) => {
     const messageDiv = document.getElementById('message');
-    if(result) {
+    if (result) {
         messageDiv.innerHTML = positiveMessage;
         messageDiv.style.color = 'green';
     } else {

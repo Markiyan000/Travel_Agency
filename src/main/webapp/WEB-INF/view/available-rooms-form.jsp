@@ -18,6 +18,9 @@
 <label>
     <input type="date" id="departureDate"/>
 </label>
+<label>
+    <input type="number" id="numberOfRooms" />
+</label>
 <button type="submit" onclick="sendAjaxCall(${roomId})">Check</button>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sendAjaxCall.js"></script>
 </body>

@@ -47,7 +47,19 @@ public class RoomDaoImpl implements RoomDao {
         return (BigDecimal) query.getSingleResult();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public int findNumberOfRooms(Long roomId) {
+        Query query = createSelectNumberOfRoomsQuery(roomId);
+
+        return (int) query.getSingleResult();
+    }
+
     private Query createSelectPriceQuery(Long roomId) {
         return entityManager.createNativeQuery("select price from room where id = " + roomId);
+    }
+
+    private Query createSelectNumberOfRoomsQuery(Long roomId) {
+        return entityManager.createNativeQuery("select quantity from room where id = " + roomId);
     }
 }

@@ -54,7 +54,7 @@ public class BookingController {
 
     @GetMapping("room/{roomId}/available")
     @ResponseBody
-    public boolean checkAvailableRooms(@PathVariable Long roomId, @RequestParam("arrivalDate") String arrivalDate,  @RequestParam("departureDate") String departureDate) {
-        return bookingService.checkAvailableRooms(roomId, LocalDate.parse(arrivalDate), LocalDate.parse(departureDate));
+    public boolean checkAvailableRooms(@PathVariable Long roomId, @RequestParam("numberOfRooms") int numberOfRooms, @RequestParam("arrivalDate") String arrivalDate,  @RequestParam("departureDate") String departureDate) {
+        return bookingService.checkAvailableRooms(roomId, LocalDate.parse(arrivalDate), LocalDate.parse(departureDate), numberOfRooms);
     }
 }

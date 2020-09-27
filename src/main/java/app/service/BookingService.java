@@ -10,5 +10,5 @@ public interface BookingService {
 
     void save(Booking booking, Long roomId);
 
-    boolean checkAvailableRooms(Long roomId, LocalDate arrivalDate, LocalDate departureDate);
+    boolean checkAvailableRooms(Long roomId, LocalDate arrivalDate, LocalDate departureDate, int bookedNumberOfRooms);
 }

@@ -11,4 +11,6 @@ public interface RoomDao {
     void save(Long hotelId, Room room);
 
     BigDecimal findPrice(Long roomId);
+
+    int findNumberOfRooms(Long roomId);
 }
