@@ -11,10 +11,18 @@
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
+<!-- HEADER -->
+<%@include file="navigation-bar.jsp"%>
+
+<!-- FORM-->
 <div class="container">
-    <h1>User Registration Form</h1>
     <div class="card">
         <div class="card-body">
             <form:form method="post" action="${pageContext.request.contextPath}/sign-up" modelAttribute="user">
@@ -80,6 +88,5 @@
         </div>
     </div>
 </div>
-<a class="btn btn-primary" href="${pageContext.request.contextPath}/login">Back</a>
 </body>
 </html>

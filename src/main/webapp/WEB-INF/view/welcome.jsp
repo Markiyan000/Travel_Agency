@@ -11,9 +11,6 @@
 <head>
     <title>Welcome</title>
     <style>
-        body {
-            background-color: #022B5A;
-        }
 
         /*===== INTRO =====*/
         .intro__inner {

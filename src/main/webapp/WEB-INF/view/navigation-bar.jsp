@@ -11,6 +11,9 @@
     <title>Navigation Bar</title>
     <style>
         /*===== HEADER =====*/
+        body {
+            background-color: #022B5A;
+        }
 
         .header {
             width: 100%;
@@ -47,7 +50,8 @@
 
         .logo {
             font-family: 'Open Sans', sans-serif;
-            font-size: 30px;
+            font-size: 45px;
+            font-weight: bold;
             color: black;
         }
     </style>
