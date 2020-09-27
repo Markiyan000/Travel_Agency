@@ -4,7 +4,9 @@
     <title>Home</title>
 </head>
 <body>
-    <h3>Welcome :${user.firstName}</h3>
-    <a href="${pageContext.request.contextPath}/admin/home">Management</a>
+<!-- HEADER -->
+<%@include file="navigation-bar-home.jsp"%>
+<!-- INTRO -->
+<%@include file="intro.jsp"%>
 </body>
 </html>
