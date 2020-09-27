@@ -1,0 +1,42 @@
+body {
+    background-image: url("/resources/images/background-image.png");
+}
+
+.header__div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #535169;
+    align-items: center;
+    padding: 35px 0;
+}
+
+.logo {
+    color: darkslateblue;
+    font-family: "Times New Roman", serif;
+    font-size: 25px;
+    width: 100px;
+    border: 1px solid red;
+}
+
+.nav {
+    display: flex;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.nav__link {
+    margin-left: 50px;
+    color: white;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity .1s linear;
+}
+
+.nav__link:first-child {
+    margin-left: 0;
+}
+
+.nav__link:hover {
+    opacity: 1;
+}
