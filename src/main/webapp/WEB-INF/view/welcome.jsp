@@ -69,7 +69,7 @@
     </style>
 </head>
 <body>
-    <!-- INTRO -->
+    <!-- HEADER -->
     <%@include file="navigation-bar.jsp"%>
 
     <!-- INTRO -->

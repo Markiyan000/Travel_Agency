@@ -6,14 +6,16 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
-        html {
-            background-color: #56baed;
-        }
         body {
-            font-family: "Poppins", sans-serif;
             height: 100vh;
+            background-color: #022B5A;
         }
+
         a {
+            text-decoration: none;
+        }
+
+        .underlineHover {
             color: #92badd;
             display:inline-block;
             text-decoration: none;
@@ -34,6 +36,7 @@
             flex-direction: column;
             justify-content: center;
             width: 100%;
+            font-family: "Poppins", sans-serif;
             min-height: 100%;
             padding: 20px;
         }
@@ -41,11 +44,9 @@
             -webkit-border-radius: 10px 10px 10px 10px;
             border-radius: 10px 10px 10px 10px;
             background: #fff;
-            padding: 30px;
             width: 90%;
             max-width: 450px;
             position: relative;
-            padding: 0px;
             -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
             box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
             text-align: center;
@@ -115,6 +116,9 @@
             transition: all 0.5s ease-in-out;
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
+        }
+        #login {
+            margin-top: 20px;
         }
         input[type=text]:focus, input[type=password]:focus {
             background-color: #fff;
@@ -213,6 +217,10 @@
     </style>
 </head>
 <body>
+<!-- HEADER -->
+<%@include file="navigation-bar.jsp"%>
+
+<!-- FORM -->
 <div class="wrapper fadeInDown">
     <div id="formContent">
 
