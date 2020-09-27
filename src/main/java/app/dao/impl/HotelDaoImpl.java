@@ -41,7 +41,7 @@ public class HotelDaoImpl implements HotelDao {
 
     private Query createSelectOneWithJoinQuery(Long hotelId) {
         Query selectOneWithJoinQuery = entityManager.createQuery("select h from Hotel h join fetch h.country " +
-                "join fetch h.rooms where h.id =: hotelId");
+                "left join fetch h.rooms where h.id =: hotelId");
         selectOneWithJoinQuery.setParameter("hotelId", hotelId);
 
         return selectOneWithJoinQuery;
