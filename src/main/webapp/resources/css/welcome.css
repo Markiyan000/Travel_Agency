@@ -1,42 +1,50 @@
-body {
-    background-image: url("/resources/images/background-image.png");
-}
-
-.header__div {
+/*===== INTRO =====*/
+.intro__inner {
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #535169;
-    align-items: center;
-    padding: 35px 0;
+    flex-direction: column;
+    text-align: center;
 }
 
-.logo {
-    color: darkslateblue;
-    font-family: "Times New Roman", serif;
-    font-size: 25px;
-    width: 100px;
-    border: 1px solid red;
-}
-
-.nav {
-    display: flex;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.nav__link {
-    margin-left: 50px;
+.intro__title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 60px;
     color: white;
+    line-height: 1.1;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+.intro__subtitle {
+    line-height: 1.5;
+    font-size: 30px;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 60px;
+}
+
+.btn {
+    width: 100px;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+    padding: 14px 40px;
+    font-size: 13px;
+    color: white;
+    font-weight: 600;
+    font-family: inherit;
+    border: 0;
+    text-transform: uppercase;
     text-decoration: none;
-    opacity: 0.75;
-    transition: opacity .1s linear;
+    cursor: pointer;
+    transition: background-color .1s linear;
 }
 
-.nav__link:first-child {
-    margin-left: 0;
+.btn--red {
+    background-color: red;
 }
 
-.nav__link:hover {
-    opacity: 1;
+.btn--red:hover {
+    background-color: darkred;
 }

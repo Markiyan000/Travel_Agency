@@ -11,11 +11,7 @@
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sign-up.css">
 </head>
 <body>
 <!-- HEADER -->

@@ -9,52 +9,7 @@
 <html>
 <head>
     <title>Navigation Bar</title>
-    <style>
-        /*===== HEADER =====*/
-        body {
-            background-color: #022B5A;
-        }
-
-        .header {
-            width: 100%;
-            height: 15%;
-        }
-
-        .header__div {
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid white;
-            margin-left: 20px;
-        }
-
-        .nav {
-            display: flex;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-
-        .nav__link {
-            margin-left: 50px;
-            color: white;
-            text-decoration: none;
-            opacity: 0.75;
-            transition: opacity .1s linear;
-        }
-
-        .nav__link:hover {
-            opacity: 1;
-        }
-
-        .logo {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 45px;
-            font-weight: bold;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navigation-bar.css">
 </head>
 <body>
 <!-- HEADER -->
