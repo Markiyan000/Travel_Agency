@@ -30,11 +30,15 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public void save(Booking booking, Long roomId) {
+    public boolean save(Booking booking, Long roomId) {
+        if (!checkAvailableRooms(roomId, booking.getArrivalDate(), booking.getDepartureDate(), booking.getNumberOfRooms())) {
+            return false;
+        }
         BigDecimal totalPrice = calculateTotalPrice(booking, roomId);
         booking.setPrice(totalPrice);
-
         bookingDao.save(roomId, booking);
+
+        return true;
     }
 
     @Override

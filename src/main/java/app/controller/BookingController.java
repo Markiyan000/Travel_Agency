@@ -43,13 +43,17 @@ public class BookingController {
 
     @PostMapping("/room/{roomId}")
     @ResponseStatus(HttpStatus.OK)
-    public String bookRoom(@PathVariable Long roomId, @ModelAttribute Booking booking, Principal principal) {
+    public String bookRoom(@PathVariable Long roomId, @ModelAttribute Booking booking, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());
         booking.setUser(user);
 
-        bookingService.save(booking, roomId);
+        if (bookingService.save(booking, roomId)) {
+            model.addAttribute("message", "Your order is successfully booked!");
+        } else {
+            model.addAttribute("message", "Your order is rejected :( There is no available rooms on this range of date");
+        }
 
-        return "home";
+        return "booking-form";
     }
 
     @GetMapping("room/{roomId}/available")
