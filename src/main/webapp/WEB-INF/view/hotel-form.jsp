@@ -10,21 +10,70 @@
 <html>
 <head>
     <title>Hotel Form</title>
-    <style>
-        form {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sign-up.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<form:form method="post" action="/hotels" modelAttribute="hotel">
-    <form:input type="text" path="name" placeholder="Name..." />
-    <form:input type="text" path="country" placeholder="Country..." />
-    <form:input type="text" path="city" placeholder="City..." />
-    <form:textarea type="text" path="description" placeholder="Description..." />
-    <form:input type="number" path="stars" placeholder="Stars..." />
-    <form:input type="file" path="photo" placeholder="Photo..." />
-    <button type="submit">Save Hotel</button>
-</form:form>
+<!-- HEADER -->
+<%@include file="navigation-bar-home.jsp"%>
+
+<!-- FORM-->
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form:form method="post" action="${pageContext.request.contextPath}/hotels" modelAttribute="hotel">
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="name"
+                                    placeholder="Enter name..."  path="name"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="country" class="col-sm-2 col-form-label">Country</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="country"
+                                    placeholder="Enter country..." path="country" />
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label for="city" class="col-sm-2 col-form-label">City</label>
+                    <div class="col-sm-7">
+                        <form:input type="text" class="form-control" name="city"
+                                    placeholder="Enter city..." path="city" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-7">
+                        <form:textarea type="text" class="form-control" name="description"
+                                    placeholder="Enter description..." path="description" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="stars" class="col-sm-2 col-form-label">Stars</label>
+                    <div class="col-sm-7">
+                        <form:input type="number" class="form-control" name="stars"
+                                    placeholder="Enter stars..." path="stars" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+                    <div class="col-sm-7">
+                        <form:input type="file" class="form-control" name="photo"
+                                    path="photo" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form:form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
