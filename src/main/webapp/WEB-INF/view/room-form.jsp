@@ -10,24 +10,77 @@
 <html>
 <head>
     <title>Room Form</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sign-up.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<form:form method="post" action="/rooms/${hotelId}" modelAttribute="room">
-    <form:select path="roomType">
-        <form:option value="APARTMENT" selected="APARTMENT" />
-        <form:option value="BALCONY" />
-        <form:option value="BDR" />
-        <form:option value="BUSINESS" />
-        <form:option value="CONNECTED_ROOMS" />
-        <form:option value="DE LUXE" />
-        <form:option value="FAMILY ROOM" />
-    </form:select>
-    <form:input type="number" path="numberOfPeople" placeholder="Number of people..." />
-    <form:input type="number" path="price" placeholder="Price..." />
-    <form:textarea type="text" path="description" placeholder="Description..." />
-    <form:input type="number" path="quantity" placeholder="Quantity..." />
-    <form:input type="file" path="photo" />
-    <button type="submit">Save</button>
-</form:form>
+<!-- HEADER -->
+<%@include file="navigation-bar-home.jsp"%>
+
+<!-- FORM-->
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form:form method="post" action="${pageContext.request.contextPath}/rooms/${hotelId}" modelAttribute="room">
+
+                <div class="form-group row">
+                    <label for="roomType" class="col-sm-2 col-form-label">Room Type</label>
+                    <div class="col-sm-7">
+                        <form:select path="roomType" сlass="form-control">
+                            <form:option value="APARTMENT" selected="APARTMENT" />
+                            <form:option value="BALCONY" />
+                            <form:option value="BDR" />
+                            <form:option value="BUSINESS" />
+                            <form:option value="CONNECTED_ROOMS" />
+                            <form:option value="DE LUXE" />
+                            <form:option value="FAMILY ROOM" />
+                        </form:select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="numberOfPeople" class="col-sm-2 col-form-label">Number Of People</label>
+                    <div class="col-sm-7">
+                        <form:input type="number" class="form-control" name="numberOfPeople"
+                                    placeholder="Enter number of people..." path="numberOfPeople" />
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label for="price" class="col-sm-2 col-form-label">City</label>
+                    <div class="col-sm-7">
+                        <form:input type="number" class="form-control" name="price"
+                                    placeholder="Enter price..." path="price" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-7">
+                        <form:textarea type="text" class="form-control" name="description"
+                                       placeholder="Enter description..." path="description" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+                    <div class="col-sm-7">
+                        <form:input type="number" class="form-control" name="quantity"
+                                    placeholder="Enter quantity..." path="quantity" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+                    <div class="col-sm-7">
+                        <form:input type="file" class="form-control" name="photo"
+                                    path="photo" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Room</button>
+            </form:form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

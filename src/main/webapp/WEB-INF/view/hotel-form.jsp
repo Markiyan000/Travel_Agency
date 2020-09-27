@@ -70,7 +70,7 @@
                                     path="photo" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Save Hotel</button>
             </form:form>
         </div>
     </div>
