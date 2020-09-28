@@ -31,10 +31,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAll() {
         Query selectAllQuery = entityManager.createQuery("select u from User u join fetch u.userRole");
 
         return selectAllQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        User userProxy = entityManager.getReference(User.class, id);
+        entityManager.remove(userProxy);
     }
 
     private Query createSelectByUsernameQuery(String username) {

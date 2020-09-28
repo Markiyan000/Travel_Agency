@@ -8,6 +8,7 @@ import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,13 +36,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userDao.save(constructUser(user));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAll() {
         return userDao.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        userDao.delete(id);
     }
 
     private User constructUser(User user) {

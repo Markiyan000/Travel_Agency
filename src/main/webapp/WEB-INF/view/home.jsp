@@ -3,6 +3,11 @@
 <html>
 <head>
     <title>Home</title>
+    <style>
+        body {
+            background-color: #022B5A;
+        }
+    </style>
 </head>
 <body>
 <!-- HEADER -->

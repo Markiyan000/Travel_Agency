@@ -41,7 +41,7 @@ public class User {
     @JoinColumn(name = "user_role_id")
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Booking> bookings = new ArrayList<>();
 
     public User() {

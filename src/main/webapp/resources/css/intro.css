@@ -1,4 +1,8 @@
 /*===== INTRO =====*/
+body {
+    background-color: #022B5A;
+}
+
 .intro__inner {
     display: flex;
     flex-direction: column;

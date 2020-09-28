@@ -13,4 +13,6 @@ public interface UserService {
     void save(User user);
 
     List<User> findAll();
+
+    void delete(Long id);
 }

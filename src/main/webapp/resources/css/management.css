@@ -1,0 +1,17 @@
+body {
+    background-color: white;
+}
+
+h3 {
+    text-align: center;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: white;
+    text-underline: none;
+}
