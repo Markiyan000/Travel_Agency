@@ -12,7 +12,7 @@
     <title>Welcome</title>
 <body>
     <!-- HEADER -->
-    <%@include file="navigation-bar.jsp"%>
+    <%@include file="navigation-bar-visitor.jsp"%>
     <!-- INTRO -->
     <%@include file="intro.jsp"%>
 </body>

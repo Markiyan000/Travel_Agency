@@ -5,67 +5,11 @@
 <head>
     <title>Hotel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hotel.css">
-    <style>
-        .rooms {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .room__item {
-            width: 25%;
-            margin-bottom: 30px;
-            padding: 0 15px;
-            margin-left: 30px;
-        }
-
-        .room__photo {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .room__item__inner {
-            display: flex;
-            flex-direction: row;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .room__item__content{
-            font-size: 18px;
-            margin-left: 10px;
-            color: white;
-        }
-
-        .room__item__type {
-            color: red;
-            font-size: 20px;
-            margin-left: 50px;
-            margin-bottom: 20px;
-        }
-
-        .links {
-            display: flex;
-            flex-direction: column;
-        }
-
-        a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.75;
-            transition: opacity .1s linear;
-            margin-bottom: 10px;
-        }
-
-        a:hover {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body>
 <!-- HEADER -->
 <%@include file="navigation-bar.jsp"%>
+
 <div class="container">
     <img class="hotel__photo" src="/resources/images/${hotel.photo}" width="700" height="450" alt=""/>
     <div class="hotel__content">
@@ -82,7 +26,7 @@
             <img class="icon" src="${pageContext.request.contextPath}/resources/icons/description-icon.jpg" width="50" height="50" alt="" />
             <div class="info">${hotel.description}</div>
         </div>
-        <div class="hotel__stars">Stars:   ${hotel.stars}</div>
+        <div class="hotel__stars">Stars: ${hotel.stars}</div>
     </div>
 </div>
 

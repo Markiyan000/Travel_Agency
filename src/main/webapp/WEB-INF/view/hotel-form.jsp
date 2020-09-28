@@ -15,7 +15,7 @@
 </head>
 <body>
 <!-- HEADER -->
-<%@include file="navigation-bar-home.jsp"%>
+<%@include file="navigation-bar.jsp"%>
 
 <!-- FORM-->
 <div class="container">
