@@ -1,10 +1,11 @@
 package app.model;
 
+import app.annotation.LocalDateConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 import static app.message.Messages.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -18,12 +19,14 @@ public class Booking {
 
     @Column(name = "arrival_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotEmpty
+    @NotNull
+    @LocalDateConstraint
     private LocalDate arrivalDate;
 
     @Column(name = "departure_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotEmpty
+    @NotNull
+    @LocalDateConstraint
     private LocalDate departureDate;
 
     @Column(name = "price")

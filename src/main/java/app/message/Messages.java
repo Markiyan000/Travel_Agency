@@ -8,4 +8,5 @@ public class Messages {
     public static final String NUMBER_CONSTRAINT= "At least 1!";
     public static final String AGE_CONSTRAINT= "You must have at least 18 years old!";
     public static final String PASSWORD_CONSTRAINT= "Password must have at least 8 characters!";
+    public static final String USERNAME_DUPLICATE="Username isn't available! Choose another.";
 }

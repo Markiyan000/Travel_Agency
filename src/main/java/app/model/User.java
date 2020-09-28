@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,13 +41,13 @@ public class User {
     @NotEmpty
     private String phone;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @NotEmpty
     private String username;
 
     @Column(name = "password")
     @NotEmpty
-    @Min(value = 8, message = PASSWORD_CONSTRAINT)
+    @Size(min = 8, message = PASSWORD_CONSTRAINT)
     private String password;
 
     @Column(name = "is_enabled")

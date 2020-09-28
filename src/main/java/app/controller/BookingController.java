@@ -59,8 +59,8 @@ public class BookingController {
     @PostMapping("/room/{roomId}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
-    public String bookRoom(@PathVariable Long roomId, @ModelAttribute @Valid Booking booking,
-                           Principal principal, Model model, BindingResult bindingResult) {
+    public String bookRoom(@PathVariable Long roomId, @ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResult,
+                           Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
             return "booking-form";
         }
