@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -27,6 +28,13 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public void save(User user) {
         entityManager.persist(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        Query selectAllQuery = entityManager.createQuery("select u from User u join fetch u.userRole");
+
+        return selectAllQuery.getResultList();
     }
 
     private Query createSelectByUsernameQuery(String username) {
