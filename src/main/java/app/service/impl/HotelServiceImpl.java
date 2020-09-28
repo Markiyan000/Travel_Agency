@@ -2,13 +2,14 @@ package app.service.impl;
 
 import app.dao.CountryDao;
 import app.dao.HotelDao;
+import static app.message.Messages.*;
+import app.exception.EntityNotFoundException;
 import app.model.Country;
 import app.model.Hotel;
 import app.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -41,7 +42,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     @Transactional
     public Hotel findOne(Long hotelId) {
-        return hotelDao.findOne(hotelId).orElseThrow(() -> new RuntimeException("Cannot found hotel with id " + hotelId));
+        return hotelDao.findOne(hotelId).orElseThrow(() -> new EntityNotFoundException(HOTEL_NOT_FOUND + hotelId));
     }
 
     @Override

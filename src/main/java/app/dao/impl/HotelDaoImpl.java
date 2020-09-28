@@ -2,12 +2,13 @@ package app.dao.impl;
 
 import app.dao.CountryDao;
 import app.dao.HotelDao;
+import app.exception.EntityNotFoundException;
 import app.model.Country;
 import app.model.Hotel;
+import static app.message.Messages.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -52,7 +53,7 @@ public class HotelDaoImpl implements HotelDao {
     @Override
     @Transactional(readOnly = true)
     public List<Hotel> findByCountry(String countryName) {
-        Country country = countryDao.findByName(countryName).orElseThrow(() -> new RuntimeException("Cannot found country with name ---> " + countryName));
+        Country country = countryDao.findByName(countryName).orElseThrow(() -> new EntityNotFoundException(COUNTRY_NOT_FOUND + countryName));
         Query query = createSelectByCountryQuery(country);
 
         return query.getResultList();

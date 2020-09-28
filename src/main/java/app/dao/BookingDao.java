@@ -1,7 +1,6 @@
 package app.dao;
 
 import app.model.Booking;
-import app.model.User;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 

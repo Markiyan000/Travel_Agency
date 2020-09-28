@@ -1,6 +1,7 @@
 package app.security;
 
 import app.dao.UserDao;
+import app.message.Messages;
 import app.model.User;
 import app.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import static app.message.Messages.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,7 +31,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByUsername(username);
+        User user = userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND + username));
         List<GrantedAuthority> grantedAuthorities = buildUserAuthority(user.getUserRole());
 
         return buildUserForAuthentication(user, grantedAuthorities);

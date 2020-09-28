@@ -2,6 +2,7 @@ package app.service.impl;
 
 import app.dao.UserDao;
 import app.dao.UserRoleDao;
+import app.exception.EntityNotFoundException;
 import app.model.User;
 import app.model.UserRole;
 import app.service.UserService;
@@ -9,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import static app.message.Messages.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + username));
     }
 
     @Override
