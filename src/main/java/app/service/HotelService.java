@@ -16,4 +16,6 @@ public interface HotelService {
     Hotel findOne(Long hotelId);
 
     List<Hotel> findByCountry(String countryName);
+
+    void deleteById(Long hotelId);
 }

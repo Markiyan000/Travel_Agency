@@ -16,4 +16,6 @@ public interface HotelDao {
     Optional<Hotel> findOne(Long hotelId);
 
     List<Hotel> findByCountry(String countryName);
+
+    void delete(Long hotelId);
 }

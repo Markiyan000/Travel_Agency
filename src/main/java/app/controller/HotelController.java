@@ -57,6 +57,14 @@ public class HotelController {
         return "hotel";
     }
 
+    @DeleteMapping("/{hotelId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String deleteById(@PathVariable Long hotelId) {
+        hotelService.deleteById(hotelId);
+
+        return "redirect:admin/hotels";
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public String findByCountry(@RequestParam("country") String country, Model model) {

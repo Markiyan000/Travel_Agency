@@ -2,6 +2,8 @@ package app.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +36,9 @@ public class Room {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
+
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.REMOVE})
+    private List<Booking> bookingsOnRooms = new ArrayList<>();
 
     public Room() {
 
@@ -128,6 +133,14 @@ public class Room {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public List<Booking> getBookingsOnRooms() {
+        return bookingsOnRooms;
+    }
+
+    public void setBookingsOnRooms(List<Booking> bookingsOnRooms) {
+        this.bookingsOnRooms = bookingsOnRooms;
     }
 
     @Override

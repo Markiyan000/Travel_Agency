@@ -50,6 +50,12 @@ public class HotelServiceImpl implements HotelService {
         return hotelDao.findByCountry(countryName);
     }
 
+    @Override
+    @Transactional
+    public void deleteById(Long hotelId) {
+        hotelDao.delete(hotelId);
+    }
+
     private Country fetchCountryFromDataSource(String countryName) {
         return countryDao.findByName(countryName).orElseGet(() -> {
             Country persistedCountry = new Country(countryName);

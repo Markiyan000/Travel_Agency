@@ -40,11 +40,12 @@
                 <td>${hotel.city}</td>
                 <td>${hotel.description}</td>
                 <td>${hotel.country.name}</td>
-                <td><button type="button" onclick="sendDeleteRequest('users', ${hotel.id})">Delete</button></td>
+                <td><button type="button" onclick="sendDeleteRequest('hotels', ${hotel.id})">Delete</button></td>
                 <td><a href="/rooms/${hotel.id}/form">Add Room</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sendDeleteUserRequest.js"></script>
 </body>
 </html>

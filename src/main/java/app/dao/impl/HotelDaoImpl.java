@@ -58,6 +58,13 @@ public class HotelDaoImpl implements HotelDao {
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public void delete(Long hotelId) {
+        Hotel hotelProxy = entityManager.getReference(Hotel.class, hotelId);
+        entityManager.remove(hotelProxy);
+    }
+
     private Query createSelectOneWithJoinQuery(Long hotelId) {
         Query selectOneWithJoinQuery = entityManager.createQuery("select h from Hotel h join fetch h.country " +
                 "left join fetch h.rooms where h.id =: hotelId");
