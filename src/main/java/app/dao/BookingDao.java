@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.model.Booking;
+import app.model.User;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -10,4 +11,6 @@ public interface BookingDao {
     void save(Long roomId, Booking booking);
 
     List<Booking> findByRoom(Long roomId);
+
+    List<Booking> findByUser(Long userId);
 }

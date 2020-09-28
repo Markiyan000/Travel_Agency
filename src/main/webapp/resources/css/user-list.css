@@ -5,3 +5,7 @@ body {
 .container {
     margin-top: 50px;
 }
+
+a {
+    text-underline: none;
+}

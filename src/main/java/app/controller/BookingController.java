@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/bookings")
@@ -39,6 +40,14 @@ public class BookingController {
         model.addAttribute("roomId", roomId);
 
         return "available-rooms-form";
+    }
+
+    @GetMapping("/user/{userId}")
+    public String findBookingByUser(@PathVariable Long userId, Model model) {
+        List<Booking> bookings = bookingService.findByUser(userId);
+        model.addAttribute("bookings", bookings);
+
+        return "user-bookings";
     }
 
     @PostMapping("/room/{roomId}")

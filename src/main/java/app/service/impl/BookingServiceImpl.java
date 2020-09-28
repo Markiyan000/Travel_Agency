@@ -50,6 +50,11 @@ public class BookingServiceImpl implements BookingService {
         return numberOfAvailableRooms >= bookedNumberOfRooms;
     }
 
+    @Override
+    public List<Booking> findByUser(Long userId) {
+        return bookingDao.findByUser(userId);
+    }
+
     private BigDecimal calculateTotalPrice(Booking booking, Long roomId) {
         BigDecimal priceByRoom = roomDao.findPrice(roomId);
         long days = ChronoUnit.DAYS.between(booking.getArrivalDate(), booking.getDepartureDate());

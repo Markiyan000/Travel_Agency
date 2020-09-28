@@ -3,6 +3,7 @@ package app.dao.impl;
 import app.dao.BookingDao;
 import app.model.Booking;
 import app.model.Room;
+import app.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,11 +35,27 @@ public class BookingDaoImpl implements BookingDao {
         return query.getResultList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Booking> findByUser(Long userId) {
+        Query query = createSelectByUserQuery(userId);
+
+        return query.getResultList();
+    }
+
     private Query createSelectByRoomQuery(Long roomId) {
         Room room = entityManager.getReference(Room.class, roomId);
         Query selectByRoomQuery = entityManager.createQuery("select b from Booking b where b.room =: room");
         selectByRoomQuery.setParameter("room", room);
 
         return selectByRoomQuery;
+    }
+
+    private Query createSelectByUserQuery(Long userId) {
+        User user = entityManager.getReference(User.class, userId);
+        Query selectByUserQuery = entityManager.createQuery("select b from Booking b join fetch b.room where b.user =: user");
+        selectByUserQuery.setParameter("user", user);
+
+        return selectByUserQuery;
     }
 }
