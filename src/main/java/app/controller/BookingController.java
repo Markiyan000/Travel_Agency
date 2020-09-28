@@ -9,7 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
@@ -56,7 +59,11 @@ public class BookingController {
     @PostMapping("/room/{roomId}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
-    public String bookRoom(@PathVariable Long roomId, @ModelAttribute Booking booking, Principal principal, Model model) {
+    public String bookRoom(@PathVariable Long roomId, @ModelAttribute @Valid Booking booking,
+                           Principal principal, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "booking-form";
+        }
         User user = userService.findByUsername(principal.getName());
         booking.setUser(user);
 

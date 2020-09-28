@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/rooms")
@@ -30,10 +33,12 @@ public class RoomController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/{hotelId}")
-    public String saveRoom(@PathVariable Long hotelId, @ModelAttribute Room room) {
+    public String saveRoom(@PathVariable Long hotelId, @ModelAttribute("room") @Valid Room room, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "room-form";
+        }
         roomService.save(hotelId, room);
 
         return "redirect:/" + hotelId;
     }
-
 }

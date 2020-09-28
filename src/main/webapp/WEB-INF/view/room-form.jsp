@@ -43,14 +43,16 @@
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="numberOfPeople"
                                     placeholder="Enter number of people..." path="numberOfPeople" />
+                        <form:errors path="numberOfPeople" cssClass="error__message"/>
                     </div>
                 </div>
 
                 <div class=" form-group row">
-                    <label for="price" class="col-sm-2 col-form-label">City</label>
+                    <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="price"
                                     placeholder="Enter price..." path="price" />
+                        <form:errors path="price" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -59,6 +61,7 @@
                     <div class="col-sm-7">
                         <form:textarea type="text" class="form-control" name="description"
                                        placeholder="Enter description..." path="description" />
+                        <form:errors path="description" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -67,6 +70,7 @@
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="quantity"
                                     placeholder="Enter quantity..." path="quantity" />
+                        <form:errors path="quantity" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -75,6 +79,7 @@
                     <div class="col-sm-7">
                         <form:input type="file" class="form-control" name="photo"
                                     path="photo" />
+                        <form:errors path="photo" cssClass="error__message"/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save Room</button>

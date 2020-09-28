@@ -1,6 +1,7 @@
 package app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class RoomType {
     private Long id;
 
     @Column(name = "type")
+    @NotEmpty
     private String type;
 
     public RoomType() {

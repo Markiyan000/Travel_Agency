@@ -1,6 +1,11 @@
 package app.model;
 
+import static app.message.Messages.*;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,27 +16,37 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "first_name")
+    @NotEmpty
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty
     private String lastName;
 
     @Column(name = "age")
+    @Min(value = 18, message = AGE_CONSTRAINT)
     private int age;
 
     @Column(name = "email")
+    @NotEmpty
+    @Email
     private String email;
 
     @Column(name = "phone")
+    @NotEmpty
     private String phone;
 
     @Column(name = "username")
+    @NotEmpty
     private String username;
 
     @Column(name = "password")
+    @NotEmpty
+    @Min(value = 8, message = PASSWORD_CONSTRAINT)
     private String password;
 
     @Column(name = "is_enabled")

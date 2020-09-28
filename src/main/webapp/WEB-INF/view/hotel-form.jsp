@@ -33,6 +33,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="name"
                                     placeholder="Enter name..."  path="name"/>
+                        <form:errors path="name" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -41,6 +42,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="country"
                                     placeholder="Enter country..." path="country" />
+                        <form:errors path="country.name" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -49,6 +51,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="city"
                                     placeholder="Enter city..." path="city" />
+                        <form:errors path="city" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -57,6 +60,7 @@
                     <div class="col-sm-7">
                         <form:textarea type="text" class="form-control" name="description"
                                     placeholder="Enter description..." path="description" />
+                        <form:errors path="description" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -65,6 +69,7 @@
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="stars"
                                     placeholder="Enter stars..." path="stars" />
+                        <form:errors path="stars" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -73,6 +78,7 @@
                     <div class="col-sm-7">
                         <form:input type="file" class="form-control" name="photo"
                                     path="photo" />
+                        <form:errors path="photo" cssClass="error__message"/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save Hotel</button>

@@ -28,6 +28,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="firstName"
                                     placeholder="Enter first name..."  path="firstName"/>
+                        <form:errors path="firstName" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -36,6 +37,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="lastName"
                                     placeholder="Enter last name..." path="lastName" />
+                        <form:errors path="lastName" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -44,6 +46,7 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="username"
                                     placeholder="Enter username..." path="username" />
+                        <form:errors path="username" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -52,6 +55,7 @@
                     <div class="col-sm-7">
                         <form:input type="password" class="form-control" name="password"
                                     placeholder="Enter password..." path="password" />
+                        <form:errors path="password" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -60,6 +64,7 @@
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="address"
                                     placeholder="Enter age..." path="age" />
+                        <form:errors path="age" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -68,14 +73,16 @@
                     <div class="col-sm-7">
                         <form:input type="text" class="form-control" name="contact"
                                     placeholder="Enter email..." path="email" />
+                        <form:errors path="email" cssClass="error__message"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="contact" class="col-sm-2 col-form-label">Phone Number</label>
+                    <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
                     <div class="col-sm-7">
-                        <form:input type="text" class="form-control" name="contact"
+                        <form:input type="text" class="form-control" name="phone"
                                     placeholder="Enter phone..." path="phone" />
+                        <form:errors path="phone" cssClass="error__message"/>
                     </div>
                 </div>
 

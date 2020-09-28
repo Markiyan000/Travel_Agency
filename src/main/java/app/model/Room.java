@@ -1,10 +1,14 @@
 package app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static app.message.Messages.*;
 
 @Entity
 @Table(name = "room")
@@ -15,18 +19,23 @@ public class Room {
     private Long id;
 
     @Column(name = "number_of_people")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private int numberOfPeople;
 
     @Column(name = "price")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private BigDecimal price;
 
     @Column(name = "description")
+    @NotEmpty
     private String description;
 
     @Column(name = "quantity")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private int quantity;
 
     @Column(name = "photo")
+    @NotEmpty
     private String photo;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -142,6 +151,8 @@ public class Room {
     public void setBookingsOnRooms(List<Booking> bookingsOnRooms) {
         this.bookingsOnRooms = bookingsOnRooms;
     }
+
+
 
     @Override
     public String toString() {

@@ -5,3 +5,8 @@ body {
 .container {
     margin-top: 50px;
 }
+
+.error__message {
+    color: red;
+    font-weight: bold;
+}

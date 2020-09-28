@@ -1,8 +1,12 @@
 package app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+
+import static app.message.Messages.*;
 
 @Entity
 @Table(name = "hotel")
@@ -13,18 +17,23 @@ public class Hotel {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty
     private String name;
 
     @Column(name = "city")
+    @NotEmpty
     private String city;
 
     @Column(name = "description")
+    @NotEmpty
     private String description;
 
     @Column(name = "photo")
+    @NotEmpty
     private String photo;
 
     @Column(name = "stars")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private int stars;
 
     @ManyToOne(fetch = FetchType.EAGER)

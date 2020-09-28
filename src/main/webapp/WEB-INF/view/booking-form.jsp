@@ -31,6 +31,7 @@
                     <div class="col-sm-7">
                         <form:input type="date" class="form-control" name="arrivalDate"
                                     placeholder="Choose arrival date..."  path="arrivalDate"/>
+                        <form:errors path="arrivalDate" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -39,6 +40,7 @@
                     <div class="col-sm-7">
                         <form:input type="date" class="form-control" name="arrivalDate"
                                     placeholder="Choose departure date..."  path="departureDate"/>
+                        <form:errors path="departureDate" cssClass="error__message"/>
                     </div>
                 </div>
 
@@ -47,6 +49,7 @@
                     <div class="col-sm-7">
                         <form:input type="number" class="form-control" name="numberOfRooms"
                                     placeholder="Enter number of rooms..." path="numberOfRooms" />
+                        <form:errors path="numberOfRooms" cssClass="error__message"/>
                     </div>
                 </div>
 

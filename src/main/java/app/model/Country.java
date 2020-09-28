@@ -1,6 +1,7 @@
 package app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Country {
     private Long id;
 
     @Column(name = "name")
+    @NotEmpty
     private String name;
 
     public Country() {

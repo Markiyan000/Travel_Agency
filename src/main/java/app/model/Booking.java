@@ -1,8 +1,10 @@
 package app.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+import static app.message.Messages.*;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,16 +18,20 @@ public class Booking {
 
     @Column(name = "arrival_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotEmpty
     private LocalDate arrivalDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "departure_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotEmpty
     private LocalDate departureDate;
 
     @Column(name = "price")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private BigDecimal price;
 
     @Column(name = "number_of_rooms")
+    @Min(value = 1, message = NUMBER_CONSTRAINT)
     private int numberOfRooms;
 
     @ManyToOne(fetch = FetchType.LAZY)
