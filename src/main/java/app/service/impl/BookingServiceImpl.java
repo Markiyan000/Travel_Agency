@@ -2,6 +2,7 @@ package app.service.impl;
 
 import app.dao.BookingDao;
 import app.dao.RoomDao;
+import app.dto.BookingDto;
 import app.model.Booking;
 import app.service.BookingService;
 import app.utils.LocalDates;
@@ -31,7 +32,8 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional
     public boolean save(Booking booking, Long roomId) {
-        if (!checkAvailableRooms(roomId, booking.getArrivalDate(), booking.getDepartureDate(), booking.getNumberOfRooms())) {
+        BookingDto bookingDto = BookingDto.valueOf(booking);
+        if (!checkAvailableRooms(roomId, bookingDto)) {
             return false;
         }
         BigDecimal totalPrice = calculateTotalPrice(booking, roomId);
@@ -43,11 +45,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public boolean checkAvailableRooms(Long roomId, LocalDate arrivalDate, LocalDate departureDate, int bookedNumberOfRooms) {
+    public boolean checkAvailableRooms(Long roomId, BookingDto bookingDto) {
         List<Booking> bookingsOnRoom = bookingDao.findByRoom(roomId);
-        int numberOfAvailableRooms = findAvailableRoomsInRangeDate(roomId, bookingsOnRoom, arrivalDate, departureDate);
+        int numberOfAvailableRooms = findAvailableRoomsInRangeDate(roomId, bookingsOnRoom, bookingDto.getArrivalDate(), bookingDto.getDepartureDate());
 
-        return numberOfAvailableRooms >= bookedNumberOfRooms;
+        return numberOfAvailableRooms >= bookingDto.getNumberOfRooms();
     }
 
     @Override

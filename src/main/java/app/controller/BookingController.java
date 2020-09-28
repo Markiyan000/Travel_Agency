@@ -1,7 +1,10 @@
 package app.controller;
 
+import app.dto.BookingDto;
+import app.message.Messages;
 import app.model.Booking;
 import app.model.User;
+import static app.message.Messages.*;
 import app.service.BookingService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -43,6 +45,7 @@ public class BookingController {
     @GetMapping("/room/{roomId}/available/form")
     public String checkAvailableRoomsForm(@PathVariable Long roomId, Model model) {
         model.addAttribute("roomId", roomId);
+        model.addAttribute("bookingDto", new BookingDto());
 
         return "available-rooms-form";
     }
@@ -68,17 +71,27 @@ public class BookingController {
         booking.setUser(user);
 
         if (bookingService.save(booking, roomId)) {
-            model.addAttribute("message", "Your order is successfully booked!");
+            model.addAttribute("message", POSITIVE_BOOKING);
         } else {
-            model.addAttribute("message", "Your order is rejected :( There is no available rooms on this range of date");
+            model.addAttribute("message", NEGATIVE_BOOKING);
         }
 
         return "booking-form";
     }
 
     @GetMapping("room/{roomId}/available")
-    @ResponseBody
-    public boolean checkAvailableRooms(@PathVariable Long roomId, @RequestParam("numberOfRooms") int numberOfRooms, @RequestParam("arrivalDate") String arrivalDate,  @RequestParam("departureDate") String departureDate) {
-        return bookingService.checkAvailableRooms(roomId, LocalDate.parse(arrivalDate), LocalDate.parse(departureDate), numberOfRooms);
+    public String checkAvailableRooms(@PathVariable Long roomId, @ModelAttribute("bookingDto") @Valid BookingDto bookingDto,
+                                       BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "available-rooms-form";
+        }
+        boolean isAvailable = bookingService.checkAvailableRooms(roomId, bookingDto);
+        if (isAvailable) {
+            model.addAttribute("message", AVAILABLE_ROOM);
+        } else {
+            model.addAttribute("message", NOT_AVAILABLE_ROOM);
+        }
+
+        return "available-rooms-form";
     }
 }
