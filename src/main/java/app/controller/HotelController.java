@@ -38,7 +38,7 @@ public class HotelController {
         return "redirect:/admin/home";
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public String findAll(Model model) {
         List<Hotel> hotels = hotelService.findAll();
@@ -55,5 +55,14 @@ public class HotelController {
         model.addAttribute("rooms", foundHotel.getRooms());
 
         return "hotel";
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String findByCountry(@RequestParam("country") String country, Model model) {
+        List<Hotel> foundHotels = hotelService.findByCountry(country);
+        model.addAttribute("hotels", foundHotels);
+
+        return "hotel-list";
     }
 }

@@ -17,7 +17,7 @@
     <div class="intro__inner">
         <h1 class="intro__title">Your The Best Agency</h1>
         <h2 class="intro__subtitle">Choose us and enjoy your life!</h2>
-        <a class="btn btn--red" href="${pageContext.request.contextPath}/hotels">Find Hotels</a>
+        <a class="btn btn--red" href="${pageContext.request.contextPath}/hotels/all">Find Hotels</a>
     </div>
 </div>
 </body>

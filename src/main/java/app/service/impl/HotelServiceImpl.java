@@ -41,8 +41,13 @@ public class HotelServiceImpl implements HotelService {
     @Override
     @Transactional
     public Hotel findOne(Long hotelId) {
-        Hotel foundHotel = hotelDao.findOne(hotelId).orElseThrow(() -> new RuntimeException("Cannot found hotel with id " + hotelId));
-        return foundHotel;
+        return hotelDao.findOne(hotelId).orElseThrow(() -> new RuntimeException("Cannot found hotel with id " + hotelId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Hotel> findByCountry(String countryName) {
+        return hotelDao.findByCountry(countryName);
     }
 
     private Country fetchCountryFromDataSource(String countryName) {

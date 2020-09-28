@@ -45,7 +45,7 @@
                     <td>${user.username}</td>
                     <td>${user.enabled}</td>
                     <td><a href="/bookings/user/${user.id}">Bookings</a></td>
-                    <td><button type="button" onclick="sendDeleteUserRequest(${user.id})">Delete</button></td>
+                    <td><button type="button" onclick="sendDeleteRequest('users', ${user.id})">Delete</button></td>
                 </tr>
             </c:forEach>
         </table>

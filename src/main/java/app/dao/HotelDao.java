@@ -14,4 +14,6 @@ public interface HotelDao {
     List<Hotel> findAll();
 
     Optional<Hotel> findOne(Long hotelId);
+
+    List<Hotel> findByCountry(String countryName);
 }

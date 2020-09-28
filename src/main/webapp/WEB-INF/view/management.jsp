@@ -9,7 +9,7 @@
     <h3>Management Page</h3>
     <div class="links">
         <a href="${pageContext.request.contextPath}/users">View All Users</a>
-        <a href="">View All Hotels</a>
+        <a href="${pageContext.request.contextPath}/admin/hotels">View All Hotels</a>
     </div>
 </body>
 </html>

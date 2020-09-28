@@ -16,6 +16,15 @@
 <!-- HEADER -->
 <%@include file="navigation-bar.jsp"%>
 
+<div class="search__form">
+    <form method="get" action="${pageContext.request.contextPath}/hotels">
+        <div><label>
+            <input type="text" name="country" placeholder="Search by country..." />
+        </label></div>
+        <div><input type="submit" /></div>
+    </form>
+</div>
+
 <!-- HOTELS -->
 <div class="hotels">
     <c:forEach items="${hotels}" var="hotel">
