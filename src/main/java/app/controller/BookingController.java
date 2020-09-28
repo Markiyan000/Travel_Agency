@@ -6,6 +6,7 @@ import app.service.BookingService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class BookingController {
     }
 
     @GetMapping("/room/{roomId}/form")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String bookingForm(@PathVariable Long roomId, Model model) {
         model.addAttribute("roomId", roomId);
         model.addAttribute("booking", new Booking());
@@ -43,6 +45,7 @@ public class BookingController {
     }
 
     @GetMapping("/user/{userId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String findBookingByUser(@PathVariable Long userId, Model model) {
         List<Booking> bookings = bookingService.findByUser(userId);
         model.addAttribute("bookings", bookings);
@@ -51,6 +54,7 @@ public class BookingController {
     }
 
     @PostMapping("/room/{roomId}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
     public String bookRoom(@PathVariable Long roomId, @ModelAttribute Booking booking, Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName());

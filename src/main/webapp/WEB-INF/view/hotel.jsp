@@ -60,6 +60,5 @@
         </div>
     </c:forEach>
 </div>
-<a href="${pageContext.request.contextPath}/rooms/${hotel.id}/form">Add Room</a>
 </body>
 </html>
