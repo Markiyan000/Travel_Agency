@@ -1,0 +1,12 @@
+.positive__message, .negative__message {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.positive__message {
+    color: green;
+}
+
+.negative__message {
+    color: red;
+}

@@ -71,9 +71,9 @@ public class BookingController {
         booking.setUser(user);
 
         if (bookingService.save(booking, roomId)) {
-            model.addAttribute("message", POSITIVE_BOOKING);
+            model.addAttribute("positive", POSITIVE_BOOKING);
         } else {
-            model.addAttribute("message", NEGATIVE_BOOKING);
+            model.addAttribute("negative", NEGATIVE_BOOKING);
         }
 
         return "booking-form";
@@ -87,9 +87,9 @@ public class BookingController {
         }
         boolean isAvailable = bookingService.checkAvailableRooms(roomId, bookingDto);
         if (isAvailable) {
-            model.addAttribute("message", AVAILABLE_ROOM);
+            model.addAttribute("positive", AVAILABLE_ROOM);
         } else {
-            model.addAttribute("message", NOT_AVAILABLE_ROOM);
+            model.addAttribute("negative", NOT_AVAILABLE_ROOM);
         }
 
         return "available-rooms-form";
