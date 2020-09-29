@@ -33,7 +33,7 @@ public class BookingController {
     }
 
     @GetMapping("/room/{roomId}/form")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public String bookingForm(@PathVariable Long roomId, Model model) {
         model.addAttribute("roomId", roomId);
         model.addAttribute("booking", new Booking());
@@ -59,7 +59,7 @@ public class BookingController {
     }
 
     @PostMapping("/room/{roomId}")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public String bookRoom(@PathVariable Long roomId, @ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResult,
                            Principal principal, Model model) {
         if (bindingResult.hasErrors()) {

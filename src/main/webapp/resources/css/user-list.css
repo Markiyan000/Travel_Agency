@@ -11,9 +11,9 @@ a {
 }
 
 .disable {
-    color: green;
+    color: red;
 }
 
 .enable {
-    color: red;
+    color: green;
 }

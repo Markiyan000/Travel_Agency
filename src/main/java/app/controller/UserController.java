@@ -34,7 +34,7 @@ public class UserController {
     public String enableUser(@PathVariable Long userId) {
         userService.enable(userId);
 
-        return "redirect:/users";
+        return "redirect:/users/all";
     }
 
     @DeleteMapping("/{userId}")
