@@ -31,7 +31,6 @@ public class RegistrationController {
     }
 
     @PostMapping("/sign-up")
-    @ResponseStatus(HttpStatus.CREATED)
     public String signUpForm(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "sign-up";

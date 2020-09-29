@@ -34,18 +34,16 @@ public class HotelController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public String save(@ModelAttribute("hotel") @Valid Hotel hotel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "hotel-form";
         }
 
         hotelService.save(hotel);
-        return "redirect:/admin/home";
+        return "redirect:/admin/hotels";
     }
 
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
     public String findAll(Model model) {
         List<Hotel> hotels = hotelService.findAll();
         model.addAttribute("hotels", hotels);
@@ -54,7 +52,6 @@ public class HotelController {
     }
 
     @GetMapping("/{hotelId}")
-    @ResponseStatus(HttpStatus.OK)
     public String findOne(@PathVariable Long hotelId, Model model) {
         Hotel foundHotel = hotelService.findOne(hotelId);
         model.addAttribute("hotel", foundHotel);
@@ -64,15 +61,14 @@ public class HotelController {
     }
 
     @DeleteMapping("/{hotelId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String deleteById(@PathVariable Long hotelId) {
+    public void deleteById(@PathVariable Long hotelId) {
         hotelService.deleteById(hotelId);
-
-        return "redirect:admin/hotels";
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public String findByCountry(@RequestParam("country") String country, Model model) {
         List<Hotel> foundHotels = hotelService.findByCountry(country);
         model.addAttribute("hotels", foundHotels);

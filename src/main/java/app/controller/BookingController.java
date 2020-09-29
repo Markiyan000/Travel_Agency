@@ -1,7 +1,6 @@
 package app.controller;
 
 import app.dto.BookingDto;
-import app.message.Messages;
 import app.model.Booking;
 import app.model.User;
 import static app.message.Messages.*;
@@ -61,7 +60,6 @@ public class BookingController {
 
     @PostMapping("/room/{roomId}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    @ResponseStatus(HttpStatus.OK)
     public String bookRoom(@PathVariable Long roomId, @ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResult,
                            Principal principal, Model model) {
         if (bindingResult.hasErrors()) {

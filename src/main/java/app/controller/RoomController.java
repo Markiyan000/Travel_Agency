@@ -39,6 +39,6 @@ public class RoomController {
         }
         roomService.save(hotelId, room);
 
-        return "redirect:/" + hotelId;
+        return "redirect:/admin/hotels";
     }
 }
