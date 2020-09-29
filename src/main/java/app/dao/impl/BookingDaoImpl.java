@@ -53,7 +53,8 @@ public class BookingDaoImpl implements BookingDao {
 
     private Query createSelectByUserQuery(Long userId) {
         User user = entityManager.getReference(User.class, userId);
-        Query selectByUserQuery = entityManager.createQuery("select b from Booking b join fetch b.room where b.user =: user");
+        Query selectByUserQuery = entityManager.createQuery("select b from Booking b join fetch b.room where b.user =: user " +
+                "order by b.arrivalDate");
         selectByUserQuery.setParameter("user", user);
 
         return selectByUserQuery;
