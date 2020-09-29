@@ -1,6 +1,5 @@
 package app.service.impl;
 
-import static app.utils.LocalDates.*;
 import app.dao.BookingDao;
 import app.dao.RoomDao;
 import app.dto.BookingDto;

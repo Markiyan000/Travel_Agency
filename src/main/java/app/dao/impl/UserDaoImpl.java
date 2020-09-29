@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        Query selectAllQuery = entityManager.createQuery("select u from User u join fetch u.userRole");
+        Query selectAllQuery = entityManager.createQuery("select u from User u join fetch u.userRoles");
 
         return selectAllQuery.getResultList();
     }
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     private Query createSelectByUsernameQuery(String username) {
-        Query query = entityManager.createQuery("select u from User u join fetch u.userRole where u.username =: username");
+        Query query = entityManager.createQuery("select u from User u join fetch u.userRoles where u.username =: username");
         query.setParameter("username", username);
 
         return query;

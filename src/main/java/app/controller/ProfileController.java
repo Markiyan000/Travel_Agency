@@ -16,7 +16,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/profiles")
-@PreAuthorize("isAuthenticated()")
 public class ProfileController {
 
     private UserService userService;
@@ -29,6 +28,7 @@ public class ProfileController {
         this.bookingService = bookingService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{username}")
     public String userProfile(@PathVariable String username, Model model) {
         User user = userService.findByUsername(username);

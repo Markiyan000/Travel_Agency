@@ -1,6 +1,8 @@
 package app.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_role")
@@ -12,6 +14,9 @@ public class UserRole {
 
     @Column(name = "role")
     private String role;
+
+    @ManyToMany(mappedBy = "userRoles")
+    private Set<User> users = new HashSet<>();
 
     public UserRole() {
 
@@ -35,6 +40,14 @@ public class UserRole {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override

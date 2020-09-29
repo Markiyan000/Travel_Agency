@@ -63,7 +63,7 @@ public class BookingController {
     }
 
     @PostMapping("/room/{roomId}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String bookRoom(@PathVariable Long roomId, @ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResult,
                            Principal principal, Model model) {
         if (bindingResult.hasErrors()) {

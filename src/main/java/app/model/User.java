@@ -7,9 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -53,9 +51,14 @@ public class User {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "user_role_id")
-    private UserRole userRole;
+    private UserRole userRole;*/
+    @ManyToMany
+    @JoinTable(name = "user_user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Booking> bookings = new ArrayList<>();
@@ -168,12 +171,20 @@ public class User {
         isEnabled = enabled;
     }
 
-    public UserRole getUserRole() {
+    /*public UserRole getUserRole() {
         return userRole;
     }
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }*/
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public List<Booking> getBookings() {
