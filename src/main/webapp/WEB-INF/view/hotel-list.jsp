@@ -11,17 +11,18 @@
 <head>
     <title>Hotels</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hotel-list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!-- HEADER -->
 <%@include file="navigation-bar.jsp"%>
 
 <div class="search__form">
-    <form method="get" action="${pageContext.request.contextPath}/hotels">
-        <div><label>
-            <input type="text" name="country" placeholder="Search by country..." />
-        </label></div>
-        <div><input type="submit" /></div>
+    <form class="example" action="${pageContext.request.contextPath}/hotels">
+        <label>
+            <input type="text" placeholder="Search by country.." name="country" />
+        </label>
+        <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </div>
 
