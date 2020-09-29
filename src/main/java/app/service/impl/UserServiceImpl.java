@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findByUsername(String username) {
         return userDao.findByUsername(username).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + username));
     }

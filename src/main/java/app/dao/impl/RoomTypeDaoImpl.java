@@ -16,7 +16,6 @@ public class RoomTypeDaoImpl implements RoomTypeDao {
     private EntityManager entityManager;
 
     @Override
-    @Transactional(readOnly = true)
     public RoomType findByType(String type) {
         Query query = createSelectByTypeQuery(type);
 

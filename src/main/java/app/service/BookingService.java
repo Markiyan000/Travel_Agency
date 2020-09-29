@@ -10,7 +10,5 @@ public interface BookingService {
 
     boolean save(Booking booking, Long roomId);
 
-    boolean checkAvailableRooms(Long roomId, BookingDto bookingDto);
-
     List<Booking> findByUser(Long userId);
 }

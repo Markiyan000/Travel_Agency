@@ -28,7 +28,6 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    @Transactional
     public void save(Long hotelId, Room room) {
         Hotel hotelProxy = entityManager.getReference(Hotel.class, hotelId);
         RoomType roomType = roomTypeDao.findByType(room.getRoomType().getType());
@@ -40,7 +39,6 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public BigDecimal findPrice(Long roomId) {
         Query query = createSelectPriceQuery(roomId);
 
@@ -48,7 +46,6 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public int findNumberOfRooms(Long roomId) {
         Query query = createSelectNumberOfRoomsQuery(roomId);
 

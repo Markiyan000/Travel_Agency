@@ -29,13 +29,14 @@ public class HotelDaoImpl implements HotelDao {
     }
 
     @Override
-    @Transactional
     public void save(Hotel hotel) {
+        String countryName = hotel.getCountry().getName();
+        Country country = fetchCountryFromDataSource(countryName);
+        hotel.setCountry(country);
         entityManager.persist(hotel);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Hotel> findAll() {
         Query selectAllHotels = entityManager.createQuery("select h from Hotel h join fetch h.country");
 
@@ -43,7 +44,6 @@ public class HotelDaoImpl implements HotelDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Hotel> findOne(Long hotelId) {
         Query query = createSelectOneWithJoinQuery(hotelId);
         Hotel hotel = (Hotel) query.getSingleResult();
@@ -51,7 +51,6 @@ public class HotelDaoImpl implements HotelDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Hotel> findByCountry(String countryName) {
         Country country = countryDao.findByName(countryName).orElseThrow(() -> new EntityNotFoundException(COUNTRY_NOT_FOUND + countryName));
         Query query = createSelectByCountryQuery(country);
@@ -60,7 +59,6 @@ public class HotelDaoImpl implements HotelDao {
     }
 
     @Override
-    @Transactional
     public void delete(Long hotelId) {
         Hotel hotelProxy = entityManager.getReference(Hotel.class, hotelId);
         entityManager.remove(hotelProxy);
@@ -79,5 +77,13 @@ public class HotelDaoImpl implements HotelDao {
         selectByCountryQuery.setParameter("country", country);
 
         return selectByCountryQuery;
+    }
+
+    private Country fetchCountryFromDataSource(String countryName) {
+        return countryDao.findByName(countryName).orElseGet(() -> {
+            Country persistedCountry = new Country(countryName);
+            countryDao.save(persistedCountry);
+            return persistedCountry;
+        });
     }
 }

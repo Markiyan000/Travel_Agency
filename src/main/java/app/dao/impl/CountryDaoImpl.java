@@ -18,13 +18,11 @@ public class CountryDaoImpl implements CountryDao {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void save(Country country) {
         entityManager.persist(country);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Country> findByName(String countryName) {
         Query selectByNameQuery = createSelectByNameQuery(countryName);
         Country foundCountry = extractCountryFromList(selectByNameQuery.getResultList());

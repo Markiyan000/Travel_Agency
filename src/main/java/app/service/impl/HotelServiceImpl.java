@@ -6,16 +6,13 @@ import static app.message.Messages.*;
 
 import app.dto.BookingDto;
 import app.exception.EntityNotFoundException;
-import app.model.Country;
 import app.model.Hotel;
 import app.model.Room;
-import app.service.BookingService;
+import app.service.AvailabilityService;
 import app.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,27 +21,22 @@ public class HotelServiceImpl implements HotelService {
 
     private HotelDao hotelDao;
 
-    private CountryDao countryDao;
-
-    private BookingService bookingService;
+    private AvailabilityService availabilityService;
 
     @Autowired
-    public HotelServiceImpl(HotelDao hotelDao, CountryDao countryDao, BookingService bookingService) {
+    public HotelServiceImpl(HotelDao hotelDao, AvailabilityService availabilityService) {
         this.hotelDao = hotelDao;
-        this.countryDao = countryDao;
-        this.bookingService = bookingService;
+        this.availabilityService = availabilityService;
     }
 
     @Override
     @Transactional
     public void save(Hotel hotel) {
-        String countryName = hotel.getCountry().getName();
-        Country country = fetchCountryFromDataSource(countryName);
-        hotel.setCountry(country);
         hotelDao.save(hotel);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Hotel> findAll() {
         return hotelDao.findAll();
     }
@@ -71,15 +63,7 @@ public class HotelServiceImpl implements HotelService {
     public List<Room> findAvailableRooms(Hotel hotel, BookingDto bookingDto) {
         return hotel.getRooms().
                 stream().
-                filter(r -> bookingService.checkAvailableRooms(r.getId(), bookingDto)).
+                filter(r -> availabilityService.checkAvailableRooms(r.getId(), bookingDto)).
                 collect(Collectors.toList());
-    }
-
-    private Country fetchCountryFromDataSource(String countryName) {
-        return countryDao.findByName(countryName).orElseGet(() -> {
-            Country persistedCountry = new Country(countryName);
-            countryDao.save(persistedCountry);
-            return persistedCountry;
-        });
     }
 }

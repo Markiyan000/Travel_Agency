@@ -5,16 +5,14 @@ import app.dao.BookingDao;
 import app.dao.RoomDao;
 import app.dto.BookingDto;
 import app.model.Booking;
+import app.service.AvailabilityService;
 import app.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.function.Predicate;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -23,17 +21,20 @@ public class BookingServiceImpl implements BookingService {
 
     private RoomDao roomDao;
 
+    private AvailabilityService availabilityService;
+
     @Autowired
-    public BookingServiceImpl(BookingDao bookingDao, RoomDao roomDao) {
+    public BookingServiceImpl(BookingDao bookingDao, RoomDao roomDao, AvailabilityService availabilityService) {
         this.bookingDao = bookingDao;
         this.roomDao = roomDao;
+        this.availabilityService = availabilityService;
     }
 
     @Override
     @Transactional
     public boolean save(Booking booking, Long roomId) {
         BookingDto bookingDto = BookingDto.valueOf(booking);
-        if (!checkAvailableRooms(roomId, bookingDto)) {
+        if (!availabilityService.checkAvailableRooms(roomId, bookingDto)) {
             return false;
         }
         BigDecimal totalPrice = calculateTotalPrice(booking, roomId);
@@ -45,17 +46,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public boolean checkAvailableRooms(Long roomId, BookingDto bookingDto) {
-        if (!checkDates(bookingDto.getArrivalDate(), bookingDto.getDepartureDate())) {
-            return false;
-        }
-        List<Booking> bookingsOnRoom = bookingDao.findByRoom(roomId);
-        int numberOfAvailableRooms = findAvailableRoomsInRangeDate(roomId, bookingsOnRoom, bookingDto.getArrivalDate(), bookingDto.getDepartureDate());
-
-        return numberOfAvailableRooms >= bookingDto.getNumberOfRooms();
-    }
-
-    @Override
     public List<Booking> findByUser(Long userId) {
         return bookingDao.findByUser(userId);
     }
@@ -66,22 +56,5 @@ public class BookingServiceImpl implements BookingService {
         int numberOfRooms = booking.getNumberOfRooms();
 
         return priceByRoom.multiply(BigDecimal.valueOf(days)).multiply(BigDecimal.valueOf(numberOfRooms));
-    }
-
-    private int findNumberOfBookedRoomsInRangeDate(List<Booking> bookings, LocalDate arrivalDate, LocalDate departureDate) {
-        Predicate<Booking> datesOverlapsPredicate = createDatesOverlapsPredicate(arrivalDate, departureDate);
-        return bookings.stream().filter(datesOverlapsPredicate).mapToInt(Booking::getNumberOfRooms).sum();
-    }
-
-    private Predicate<Booking> createDatesOverlapsPredicate(LocalDate arrivalDate, LocalDate departureDate) {
-        return booking -> minDate(booking.getDepartureDate(), departureDate)
-                .compareTo(maxDate(booking.getArrivalDate(), arrivalDate)) > 0;
-    }
-
-    private int findAvailableRoomsInRangeDate(Long roomId, List<Booking> bookings, LocalDate arrivalDate, LocalDate departureDate) {
-        int numberOfRooms = roomDao.findNumberOfRooms(roomId);
-        int numberOfBookedRooms = findNumberOfBookedRoomsInRangeDate(bookings, arrivalDate, departureDate);
-
-        return numberOfRooms - numberOfBookedRooms;
     }
 }

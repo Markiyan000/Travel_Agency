@@ -4,6 +4,8 @@ import app.dto.BookingDto;
 import app.model.Booking;
 import app.model.User;
 import static app.message.Messages.*;
+
+import app.service.AvailabilityService;
 import app.service.BookingService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,17 @@ public class BookingController {
 
     private UserService userService;
 
+    private AvailabilityService availabilityService;
+
     @Autowired
-    public BookingController(BookingService bookingService, UserService userService) {
+    public BookingController(BookingService bookingService, UserService userService, AvailabilityService availabilityService) {
         this.bookingService = bookingService;
         this.userService = userService;
+        this.availabilityService = availabilityService;
     }
 
     @GetMapping("/room/{roomId}/form")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public String bookingForm(@PathVariable Long roomId, Model model) {
         model.addAttribute("roomId", roomId);
         model.addAttribute("booking", new Booking());
@@ -82,13 +87,12 @@ public class BookingController {
         if (bindingResult.hasErrors()) {
             return "available-rooms-form";
         }
-        boolean isAvailable = bookingService.checkAvailableRooms(roomId, bookingDto);
+        boolean isAvailable = availabilityService.checkAvailableRooms(roomId, bookingDto);
         if (isAvailable) {
             model.addAttribute("positive", AVAILABLE_ROOM);
         } else {
             model.addAttribute("negative", NOT_AVAILABLE_ROOM);
         }
-
         return "available-rooms-form";
     }
 }

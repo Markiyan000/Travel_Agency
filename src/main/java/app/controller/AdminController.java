@@ -24,11 +24,6 @@ public class AdminController {
         this.hotelService = hotelService;
     }
 
-    @GetMapping("/management")
-    public String managementPage() {
-        return "management";
-    }
-
     @GetMapping("/hotels")
     public String findAllHotels(Model model) {
         List<Hotel> hotels = hotelService.findAll();

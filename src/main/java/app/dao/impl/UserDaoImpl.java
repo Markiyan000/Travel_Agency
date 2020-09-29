@@ -18,7 +18,6 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<User> findByUsername(String username) {
         Query selectByUsernameQuery = createSelectByUsernameQuery(username);
         User foundUser = (User) selectByUsernameQuery.getSingleResult();
@@ -27,13 +26,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<User> findAll() {
         Query selectAllQuery = entityManager.createQuery("select u from User u join fetch u.userRole");
 
@@ -41,14 +38,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         User userProxy = entityManager.getReference(User.class, id);
         entityManager.remove(userProxy);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<User> findOne(Long id) {
         User user = entityManager.find(User.class, id);
 

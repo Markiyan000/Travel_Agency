@@ -37,12 +37,6 @@ public class UserController {
         return "redirect:/users/all";
     }
 
-    @PostMapping("/{userId}")
-    public String updateUser(@PathVariable Long userId, @ModelAttribute User user) {
-        System.out.println(user.getFirstName());
-        return "home";
-    }
-
     @DeleteMapping("/{userId}")
     @ResponseBody
     public void deleteById(@PathVariable Long userId) {

@@ -27,7 +27,7 @@
             <div class="info">${hotel.description}</div>
         </div>
         <div class="hotel__stars">Stars: ${hotel.stars}</div>
-        <a href="/hotels/${hotel.id}/available/form">Find Available Rooms</a>
+        <a class="link__available__rooms" href="/hotels/${hotel.id}/available/form">Find Available Rooms</a>
     </div>
 </div>
 

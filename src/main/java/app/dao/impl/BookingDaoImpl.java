@@ -19,7 +19,6 @@ public class BookingDaoImpl implements BookingDao {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void save(Long roomId, Booking booking) {
         Room roomProxy = entityManager.getReference(Room.class, roomId);
         booking.setRoom(roomProxy);
@@ -28,7 +27,6 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Booking> findByRoom(Long roomId) {
         Query query = createSelectByRoomQuery(roomId);
 
@@ -36,7 +34,6 @@ public class BookingDaoImpl implements BookingDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Booking> findByUser(Long userId) {
         Query query = createSelectByUserQuery(userId);
 
