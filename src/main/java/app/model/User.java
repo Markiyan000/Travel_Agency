@@ -51,9 +51,6 @@ public class User {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-    /*@ManyToOne
-    @JoinColumn(name = "user_role_id")
-    private UserRole userRole;*/
     @ManyToMany
     @JoinTable(name = "user_user_role",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -170,14 +167,6 @@ public class User {
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
     }
-
-    /*public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }*/
 
     public Set<UserRole> getUserRoles() {
         return userRoles;
