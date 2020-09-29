@@ -1,6 +1,8 @@
 package app.service;
 
+import app.dto.BookingDto;
 import app.model.Hotel;
+import app.model.Room;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +20,6 @@ public interface HotelService {
     List<Hotel> findByCountry(String countryName);
 
     void deleteById(Long hotelId);
+
+    List<Room> findAvailableRooms(Hotel hotel, BookingDto bookingDto);
 }

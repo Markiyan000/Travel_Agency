@@ -7,7 +7,6 @@ import static app.message.Messages.*;
 import app.service.BookingService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,7 +78,7 @@ public class BookingController {
 
     @GetMapping("room/{roomId}/available")
     public String checkAvailableRooms(@PathVariable Long roomId, @ModelAttribute("bookingDto") @Valid BookingDto bookingDto,
-                                       BindingResult bindingResult, Model model) {
+                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "available-rooms-form";
         }

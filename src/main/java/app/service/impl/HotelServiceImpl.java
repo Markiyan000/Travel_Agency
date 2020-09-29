@@ -3,14 +3,21 @@ package app.service.impl;
 import app.dao.CountryDao;
 import app.dao.HotelDao;
 import static app.message.Messages.*;
+
+import app.dto.BookingDto;
 import app.exception.EntityNotFoundException;
 import app.model.Country;
 import app.model.Hotel;
+import app.model.Room;
+import app.service.BookingService;
 import app.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HotelServiceImpl implements HotelService {
@@ -19,10 +26,13 @@ public class HotelServiceImpl implements HotelService {
 
     private CountryDao countryDao;
 
+    private BookingService bookingService;
+
     @Autowired
-    public HotelServiceImpl(HotelDao hotelDao, CountryDao countryDao) {
+    public HotelServiceImpl(HotelDao hotelDao, CountryDao countryDao, BookingService bookingService) {
         this.hotelDao = hotelDao;
         this.countryDao = countryDao;
+        this.bookingService = bookingService;
     }
 
     @Override
@@ -55,6 +65,14 @@ public class HotelServiceImpl implements HotelService {
     @Transactional
     public void deleteById(Long hotelId) {
         hotelDao.delete(hotelId);
+    }
+
+    @Override
+    public List<Room> findAvailableRooms(Hotel hotel, BookingDto bookingDto) {
+        return hotel.getRooms().
+                stream().
+                filter(r -> bookingService.checkAvailableRooms(r.getId(), bookingDto)).
+                collect(Collectors.toList());
     }
 
     private Country fetchCountryFromDataSource(String countryName) {

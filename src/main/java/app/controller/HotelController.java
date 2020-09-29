@@ -1,6 +1,8 @@
 package app.controller;
 
+import app.dto.BookingDto;
 import app.model.Hotel;
+import app.model.Room;
 import app.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,5 +76,28 @@ public class HotelController {
         model.addAttribute("hotels", foundHotels);
 
         return "hotel-list";
+    }
+
+    @GetMapping("/{hotelId}/available/form")
+    public String availableRoomsInHotelForm(@PathVariable Long hotelId, Model model) {
+        model.addAttribute("hotelId", hotelId);
+        model.addAttribute("bookingDto", new BookingDto());
+
+        return "available-rooms-in-hotel";
+    }
+
+    @GetMapping("/{hotelId}/available")
+    public String findAvailableRooms(@PathVariable Long hotelId, @ModelAttribute("bookingDto") @Valid BookingDto bookingDto,
+                                     BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "available-rooms-form";
+        }
+        Hotel hotel = hotelService.findOne(hotelId);
+        List<Room> availableRooms = hotelService.findAvailableRooms(hotel, bookingDto);
+
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("rooms", availableRooms);
+
+        return "hotel";
     }
 }
