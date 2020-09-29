@@ -1,9 +1,10 @@
 # Travel_Agency
 This is an application that simulates work of real travel agency system.
+# Guide
 To begin with this application, you should:
  - have Java 8, Tomcat, MySQL installed on your PC
  - set database properties in resources/application.properties
- - run [a link](https://github.com/user/repo/blob/branch/other_file.md) in your RDBMS
+ - run [a link](https://github.com/Markiyan000/Travel_Agency/blob/master/src/main/resources/Travel_Agency_DB.sql)
  - type in browser <i>http://localhost:8080</i>
  - enjoy with application :)
 # Technologies
@@ -21,7 +22,7 @@ To begin with this application, you should:
     - check availability of the concrete room on concrete date
     - sign up in system
  - <b>User</b>:
-    - All the possibilites of the visitor and plus:
+    - All the possibilities of the visitor and plus:
     - sign in in system
     - book the available room
     - view MyProfile page where all information (personal data, bookings etc) are placed about current user
