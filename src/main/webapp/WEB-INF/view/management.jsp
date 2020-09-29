@@ -6,10 +6,11 @@
 </head>
 <body>
 <%@include file="navigation-bar.jsp"%>
-    <h3>Management Page</h3>
+    <h2>Management Page</h2>
     <div class="links">
-        <a href="${pageContext.request.contextPath}/users">View All Users</a>
-        <a href="${pageContext.request.contextPath}/admin/hotels">View All Hotels</a>
+        <a class="link__item" href="${pageContext.request.contextPath}/hotels/form">Add Hotel</a>
+        <a class="link__item" href="${pageContext.request.contextPath}/users">View All Users</a>
+        <a class="link__item" href="${pageContext.request.contextPath}/admin/hotels">View All Hotels</a>
     </div>
 </body>
 </html>

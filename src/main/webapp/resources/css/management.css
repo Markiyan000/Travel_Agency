@@ -1,16 +1,41 @@
 body {
-    background-color: white;
+    background-color: #022B5A;
 }
 
-h3 {
+h2 {
+    margin-top: 50px;
     text-align: center;
+    color: white;
+    opacity: 0.75;
+    margin-bottom: 100px;
 }
 
 .links {
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    width: 300px;
 }
 
 a {
     text-underline: none;
+}
+
+.link__item{
+    border-radius: 15px;
+    background-color: white;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.link__item:hover {
+    background-color: #cccccc;
+}
+
+.link__item.active {
+    background-color: cornflowerblue;
+    color: white;
 }

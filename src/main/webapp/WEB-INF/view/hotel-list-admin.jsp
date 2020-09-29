@@ -45,7 +45,6 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="${pageContext.request.contextPath}/hotels/form">Add Form</a>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sendDeleteUserRequest.js"></script>
 </body>
