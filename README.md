@@ -6,7 +6,7 @@
  - Build Tool: Maven
  - VCS: Git
 # Features
- - Visitor: 
+ - <b>Visitor</b>: 
     - view list of hotels
     - view detailed information about concrete hotel
     - find hotels by country
