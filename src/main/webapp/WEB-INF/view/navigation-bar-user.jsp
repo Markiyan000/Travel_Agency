@@ -11,6 +11,7 @@
         <div class="logo">TravelAgency</div>
         <nav class="nav">
             <a class="nav__link" href="${pageContext.request.contextPath}/home">Home</a>
+            <a class="nav__link" href="/profiles/${pageContext.request.userPrincipal.name}">My Profile</a>
             <a class="nav__link" href="#">About us</a>
             <a class="nav__link" href="#">Contact Us</a>
             <a class="nav__link" href="${pageContext.request.contextPath}/logout">Logout</a>
