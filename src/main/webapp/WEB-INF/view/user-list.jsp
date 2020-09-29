@@ -15,7 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user-list.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user-list.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/button-icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -43,9 +45,14 @@
                     <td>${user.age}</td>
                     <td>${user.email}</td>
                     <td>${user.username}</td>
-                    <td>${user.enabled}</td>
+                    <c:if test="${user.enabled}">
+                        <td><a class="enable" href="/users/${user.id}/enable">Enable</a></td>
+                    </c:if>
+                    <c:if test="${!user.enabled}">
+                        <td><a class="disable" href="/users/${user.id}/enable">Disable</a></td>
+                    </c:if>
                     <td><a href="/bookings/user/${user.id}">Bookings</a></td>
-                    <td><button type="button" onclick="sendDeleteRequest('users', ${user.id})">Delete</button></td>
+                    <td><button type="button" class="btn" onclick="sendDeleteRequest('users', ${user.id})"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
             </c:forEach>
         </table>

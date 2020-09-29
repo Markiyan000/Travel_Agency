@@ -9,3 +9,11 @@ body {
 a {
     text-underline: none;
 }
+
+.disable {
+    color: green;
+}
+
+.enable {
+    color: red;
+}

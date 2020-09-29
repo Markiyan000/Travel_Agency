@@ -52,6 +52,14 @@ public class UserServiceImpl implements UserService {
         userDao.delete(id);
     }
 
+    @Override
+    @Transactional
+    public void enable(Long id) {
+        User user = userDao.findOne(id).orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + id));
+        boolean isEnabled = user.isEnabled();
+        user.setEnabled(!isEnabled);
+    }
+
     private User constructUser(User user) {
         String encryptedPassword = encoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);

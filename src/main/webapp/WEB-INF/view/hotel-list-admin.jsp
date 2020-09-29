@@ -14,8 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user-list.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user-list.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/button-icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!-- HEADER -->
@@ -40,7 +41,7 @@
                 <td>${hotel.city}</td>
                 <td>${hotel.description}</td>
                 <td>${hotel.country.name}</td>
-                <td><button type="button" onclick="sendDeleteRequest('hotels', ${hotel.id})">Delete</button></td>
+                <td><button type="button" class="btn" onclick="sendDeleteRequest('hotels', ${hotel.id})"><i class="fa fa-trash"></i> Delete</button></td>
                 <td><a href="/rooms/${hotel.id}/form">Add Room</a></td>
             </tr>
         </c:forEach>

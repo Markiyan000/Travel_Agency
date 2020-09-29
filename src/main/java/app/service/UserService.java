@@ -15,4 +15,6 @@ public interface UserService {
     List<User> findAll();
 
     void delete(Long id);
+
+    void enable(Long id);
 }

@@ -47,6 +47,14 @@ public class UserDaoImpl implements UserDao {
         entityManager.remove(userProxy);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findOne(Long id) {
+        User user = entityManager.find(User.class, id);
+
+        return Optional.ofNullable(user);
+    }
+
     private Query createSelectByUsernameQuery(String username) {
         Query query = entityManager.createQuery("select u from User u where u.username =: username");
         query.setParameter("username", username);

@@ -33,6 +33,13 @@ public class UserController {
         return "user-list";
     }
 
+    @GetMapping("/{userId}/enable")
+    public String enableUser(@PathVariable Long userId) {
+        userService.enable(userId);
+
+        return "redirect:/users";
+    }
+
     @DeleteMapping("/{userId}")
     public String deleteById(@PathVariable Long userId) {
         userService.delete(userId);
