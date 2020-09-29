@@ -12,4 +12,8 @@ public class LocalDates {
     public static LocalDate maxDate(LocalDate first, LocalDate two) {
         return Stream.of(first, two).max(LocalDate::compareTo).get();
     }
+
+    public static boolean checkDates(LocalDate first, LocalDate second) {
+        return !first.isEqual(second) && first.isBefore(second);
+    }
 }

@@ -1,11 +1,11 @@
 package app.service.impl;
 
+import static app.utils.LocalDates.*;
 import app.dao.BookingDao;
 import app.dao.RoomDao;
 import app.dto.BookingDto;
 import app.model.Booking;
 import app.service.BookingService;
-import app.utils.LocalDates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +46,9 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional(readOnly = true)
     public boolean checkAvailableRooms(Long roomId, BookingDto bookingDto) {
+        if (!checkDates(bookingDto.getArrivalDate(), bookingDto.getDepartureDate())) {
+            return false;
+        }
         List<Booking> bookingsOnRoom = bookingDao.findByRoom(roomId);
         int numberOfAvailableRooms = findAvailableRoomsInRangeDate(roomId, bookingsOnRoom, bookingDto.getArrivalDate(), bookingDto.getDepartureDate());
 
@@ -71,8 +74,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private Predicate<Booking> createDatesOverlapsPredicate(LocalDate arrivalDate, LocalDate departureDate) {
-        return booking -> LocalDates.minDate(booking.getDepartureDate(), departureDate)
-                .compareTo(LocalDates.maxDate(booking.getArrivalDate(), arrivalDate)) > 0;
+        return booking -> minDate(booking.getDepartureDate(), departureDate)
+                .compareTo(maxDate(booking.getArrivalDate(), arrivalDate)) > 0;
     }
 
     private int findAvailableRoomsInRangeDate(Long roomId, List<Booking> bookings, LocalDate arrivalDate, LocalDate departureDate) {
