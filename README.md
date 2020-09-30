@@ -1,10 +1,10 @@
 # Travel_Agency
 This is an application that simulates work of real travel agency system.
 # Guide
-To begin with this application, you should:
+To run this application, you should:
  - have Java 8, Tomcat, MySQL installed on your PC
  - set database properties in resources/application.properties
- - run [a link](https://github.com/Markiyan000/Travel_Agency/blob/master/src/main/resources/Travel_Agency_DB.sql)
+ - run [a link](https://github.com/Markiyan000/Travel_Agency/blob/master/src/main/resources/Travel_Agency_DB.sql) to generate tables in DB
  - type in browser <i>http://localhost:8080</i>
  - enjoy with application :)
 # Technologies
